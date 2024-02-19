@@ -16,8 +16,8 @@ function App() {
 
   return (
       <div ClassName="App">
-          {/*백엔드에서 가져온 데이터입니다 : {data}*/}
-          {/*<Home />*/}
+          {/*백엔드에서 가져온 데이터입니다 : {data}
+          <Home />*/}
           <Login />
       </div>
   );

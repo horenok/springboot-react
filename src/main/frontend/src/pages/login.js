@@ -3,6 +3,9 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { loginAction } from "../actions/loginAction";
 
+import { Button } from "react-bootstrap";
+import {onSignUp} from "../actions/onSignUp";
+
 function Login() {
 
   const dispatch = useDispatch();
@@ -16,7 +19,7 @@ function Login() {
   const onPasswordHandler = (event) => {
     setPassword(event.currentTarget.value);
   }
-  const onSubimtHandler = (event) => {
+  const onSignInHandler = (event) => {
     //버튼만 누르면 리로드 되는것 막아줌
     event.preventDefault();
 
@@ -29,26 +32,39 @@ function Login() {
     }
 
     dispatch(loginAction(body)).then((res) => {
-      if (res.payload.loginSuccess) {
+      if (res.payload.code == '0000') {
         alert("LoginSuccess");
+      } else {
+        alert("LoginFail");
       }
     });
   };
+
+  const onSignUpHandler = (event) => {
+    //버튼만 누르면 리로드 되는것 막아줌
+    event.preventDefault();
+
+    onSignUp();
+  }
 
   return (
       <div style={{
         display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100vh'
       }}>
         <form style={{
-          display: 'flex', flexDirection: 'column'}}
-              onSubmit={onSubimtHandler}
-              >
+          display: 'flex', flexDirection: 'column'}}>
           <label>Email</label>
-          <input type='email' value={Email} onChange={onEmailHandler} />
+          <input type="email" value={Email} onChange={onEmailHandler}
+              style={{width: '300px', height: '30px', fontSize: '16px',}}
+          />
           <label>Password</label>
-          <input type='password' value={Password} onChange={onPasswordHandler} />
-          <br />
-          <button formAction=''>Login</button>
+          <input type='password' value={Password} onChange={onPasswordHandler}
+                 style={{width: '300px', height: '30px', fontSize: '16px',}}
+          />
+          <div style={{ display: 'flex', justifyContent: 'center', margin: '10px'}}>
+            <Button variant="dark" style={{margin: '5px'}} onClick={onSignInHandler}>Sign In</Button>
+            <Button variant="dark" style={{margin: '5px'}} onClick={onSignUpHandler}>Sign Up</Button>
+          </div>
         </form>
       </div>
   )

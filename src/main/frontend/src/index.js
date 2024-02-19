@@ -10,6 +10,8 @@ import promiseMiddleware from 'redux-promise'; //promise를 사용하기 위한 
 import {thunk} from 'redux-thunk'; //비동기 사용 위한 미들웨어
 import Reducer from './reducers/login';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 //원래 store는 객체밖에 못받기 때문에 promise와 function을 사용하기 위해 미들웨어를 사용
 const createStoreWithMiddleware = applyMiddleware(
     promiseMiddleware,
