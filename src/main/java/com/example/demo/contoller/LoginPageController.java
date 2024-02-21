@@ -1,7 +1,7 @@
 package com.example.demo.contoller;
 
 import com.example.demo.common.ResultEntity;
-import com.example.demo.dto.User;
+import com.example.demo.model.User;
 import com.example.demo.type.user.ApiResult;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
