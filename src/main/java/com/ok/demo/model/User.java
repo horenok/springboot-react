@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.ok.demo.model;
 
 public class User {
     private String Email;

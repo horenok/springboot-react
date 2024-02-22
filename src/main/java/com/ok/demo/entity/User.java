@@ -1,6 +1,6 @@
-package com.example.demo.entity;
+package com.ok.demo.entity;
 
-import com.example.demo.common.entity.AuditableEntity;
+import com.ok.demo.common.entity.AuditableEntity;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.Column;
@@ -10,7 +10,8 @@ import javax.persistence.Table;
 
 import java.time.LocalDateTime;
 
-import static com.example.demo.constants.SchemaConstants.TABLE_PREFIX;
+import static com.ok.demo.constants.SchemaConstants.TABLE_PREFIX;
+
 
 @Entity
 @SequenceGenerator(name="SeqGenerator", sequenceName = "SEQ_USER_ID", allocationSize = 1)
@@ -39,4 +40,43 @@ public class User extends AuditableEntity {
     @Column(name = "LOGIN_FAIL_COUNT")
     private Integer loginFailCount = 0;
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalDateTime getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(LocalDateTime lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    public Integer getLoginFailCount() {
+        return loginFailCount;
+    }
+
+    public void setLoginFailCount(Integer loginFailCount) {
+        this.loginFailCount = loginFailCount;
+    }
 }

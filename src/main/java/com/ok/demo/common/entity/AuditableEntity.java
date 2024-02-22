@@ -1,4 +1,4 @@
-package com.example.demo.common.entity;
+package com.ok.demo.common.entity;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;

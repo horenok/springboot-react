@@ -1,4 +1,4 @@
-package com.example.demo.type.user;
+package com.ok.demo.type.user;
 
 public enum ApiResult {
     SUCCESSS("0000", "Success"),

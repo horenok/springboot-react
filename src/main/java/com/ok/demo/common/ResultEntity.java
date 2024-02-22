@@ -1,6 +1,6 @@
-package com.example.demo.common;
+package com.ok.demo.common;
 
-import com.example.demo.type.user.ApiResult;
+import com.ok.demo.type.user.ApiResult;
 import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;

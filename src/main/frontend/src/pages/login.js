@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { loginAction } from "../actions/loginAction";
 
 import { Button } from "react-bootstrap";
-import {onSignUp} from "../actions/onSignUp";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
 
   const dispatch = useDispatch();
+  const movePage = useNavigate();
 
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
@@ -41,10 +41,10 @@ function Login() {
   };
 
   const onSignUpHandler = (event) => {
+    movePage('/SignUp');
+
     //버튼만 누르면 리로드 되는것 막아줌
     event.preventDefault();
-
-    onSignUp();
   }
 
   return (
