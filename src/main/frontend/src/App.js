@@ -9,16 +9,17 @@ import SignUp from "./pages/signup";
 function App() {
   const [data, setHello] = useState('')
 
-  useEffect(() => {
+  /*useEffect(() => {
     axios.get('/api/data')
         .then(res => setHello(res.data))
         .catch(err => console.log(err))
-  }, []);
+  }, []);*/
 
   return (
       <BrowserRouter>
           <Routes>
               {/*<Login/>*/}
+              <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
           </Routes>
