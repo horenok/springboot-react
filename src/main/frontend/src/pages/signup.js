@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {Button} from "react-bootstrap";
 import {useDispatch} from "react-redux";
-import {onSignUp} from "../actions/onSignUp";
 
 const Signup = () => {
 
@@ -33,14 +32,14 @@ const Signup = () => {
         }
     }
 
-    const emailCheckHandler = async (id) => {
+    const emailCheckHandler = async (email) => {
         const idRegex = /^[a-z\d]{5,10}$/;
-        if (id === '') {
+        if (email === '') {
             setEmailError('이메일을 입력해주세요.');
             setIsEmailAvailable(false);
             return false;
         }
-        const responseData = await idDuplicateCheck(id);
+        const responseData = await emailDuplicateCheck(email);
         if (responseData) {
             setEmailError('사용 가능한 아이디입니다.');
             setIsEmailCheck(true);
