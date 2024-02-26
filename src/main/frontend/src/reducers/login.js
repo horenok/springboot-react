@@ -1,4 +1,4 @@
-import {LOGIN, SIGNUP} from "../actions/types";
+import {EMAILDUPLICATE, LOGIN, SIGNUP} from "../actions/types";
 
 export default function (state = {}, action) {
     switch (action.type) {
@@ -7,6 +7,9 @@ export default function (state = {}, action) {
             break;
         case SIGNUP:
             return { ...state, signupSuccess: action.payload };
+            break;
+        case EMAILDUPLICATE:
+            return { ...state, emailDuplicate: action.payload };
             break;
         default:
             return state;

@@ -27,4 +27,26 @@ public class UserServiceImpl implements UserService {
 
         return dtoUser;
     }
+
+    @Override
+    public User emailDuplicate(String email) {
+
+        com.ok.demo.entity.User entityUser = userRepository.findByEmail(email);
+        if(ObjectUtils.isEmpty(entityUser)) {
+            return null;
+        }
+        User dtoUser = new User();
+        dtoUser.setEmail(entityUser.getEmail());
+
+        return dtoUser;
+    }
+
+    @Override
+    public void save(User user) {
+        com.ok.demo.entity.User entityUser = new com.ok.demo.entity.User();
+        entityUser.setEmail(user.getEmail());
+        entityUser.setPassword(user.getPassword());
+
+        userRepository.save(entityUser);
+    }
 }

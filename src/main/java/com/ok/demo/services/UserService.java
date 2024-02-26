@@ -7,4 +7,8 @@ import java.util.Optional;
 public interface UserService {
 
     User findUser(User user);
+
+    User emailDuplicate(String email);
+
+    void save(User user);
 }

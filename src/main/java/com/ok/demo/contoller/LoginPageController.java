@@ -22,9 +22,8 @@ public class LoginPageController {
         return "Hello, world!";
     }
 
-    // TODO: 2024/02/22 회원가입dto생성 후 코드수정
-    @PostMapping("/api/users/signup")
-    public ResultEntity<ApiResult> signup(@RequestBody User user) {
+    @PostMapping("/api/users/login")
+    public ResultEntity<ApiResult> login(@RequestBody User user) {
         if(StringUtils.isEmpty(user.getEmail()) || StringUtils.isEmpty(user.getPassword())) {
             return new ResultEntity<>(ApiResult.FAIL.getCode(), ApiResult.FAIL.getMessage());
         }
@@ -36,15 +35,29 @@ public class LoginPageController {
         return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage());
     }
 
-    @PostMapping("/api/users/login")
-    public ResultEntity<ApiResult> login(@RequestBody User user) {
+    @PostMapping("/api/users/emailDuplicate")
+    public ResultEntity<ApiResult> emailDuplicate(@RequestBody String email) {
+        email = email.replaceAll("^\"|\"$", "");
+
+        if(StringUtils.isEmpty(email) || StringUtils.isEmpty(email)) {
+            return new ResultEntity<>(ApiResult.FAIL.getCode(), ApiResult.FAIL.getMessage());
+        }
+
+        if(ObjectUtils.isEmpty(userService.emailDuplicate(email))) {
+            return new ResultEntity<>(ApiResult.FAIL.getCode(), ApiResult.FAIL.getMessage());
+        }
+
+        return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage());
+    }
+
+    @PostMapping("/api/users/signup")
+    public ResultEntity<ApiResult> signUp(@RequestBody User user) {
+
         if(StringUtils.isEmpty(user.getEmail()) || StringUtils.isEmpty(user.getPassword())) {
             return new ResultEntity<>(ApiResult.FAIL.getCode(), ApiResult.FAIL.getMessage());
         }
 
-        if(ObjectUtils.isEmpty(userService.findUser(user))) {
-            return new ResultEntity<>(ApiResult.FAIL.getCode(), ApiResult.FAIL.getMessage());
-        }
+        userService.save(user);
 
         return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage());
     }

@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import {Button} from "react-bootstrap";
 import {useDispatch} from "react-redux";
 
+import { onSignUp, emailDuplicateCheck } from "../actions/onSignUp";
+
 const Signup = () => {
 
     const dispatch = useDispatch();
@@ -40,7 +42,7 @@ const Signup = () => {
             return false;
         }
         const responseData = await emailDuplicateCheck(email);
-        if (responseData) {
+        if (!responseData.payload) {
             setEmailError('사용 가능한 아이디입니다.');
             setIsEmailCheck(true);
             setIsEmailAvailable(true);

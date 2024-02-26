@@ -7,6 +7,6 @@ export function loginAction(dataToSubmit) {
         .then((res) => res.data);
     return {
         type: LOGIN,
-        payload: request,
+        payload: true,
     };
 }
