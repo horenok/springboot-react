@@ -1,7 +1,7 @@
 import axios from "axios";
 import {EMAILDUPLICATE, SIGNUP} from './types';
 
-export function onSignUp(dataToSubmit) {
+/*export function onSignUp(dataToSubmit) {
     const request = axios
         .post('/api/users/signup', dataToSubmit, {
             headers: {
@@ -12,6 +12,24 @@ export function onSignUp(dataToSubmit) {
     return {
         type: SIGNUP,
         payload: true,
+    };
+}*/
+
+export function onSignUp(dataToSubmit) {
+    return (dispatch) => {
+        const request = axios.post('/api/users/signup', dataToSubmit, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        request.then((res) => {
+            if (res.data.code === '0000') {
+                alert("SignUpSuccess");
+            } else {
+                alert("SignUpFail");
+            }
+        });
     };
 }
 

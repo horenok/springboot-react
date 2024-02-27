@@ -96,13 +96,7 @@ const Signup = () => {
             return;
         }
 
-        dispatch(onSignUp(body)).then((res) => {
-            if (res.payload.code == '0000') {
-                alert("SignUpSuccess");
-            } else {
-                alert("SignUpFail");
-            }
-        });
+        dispatch(onSignUp(body));
     };
 
     return (
