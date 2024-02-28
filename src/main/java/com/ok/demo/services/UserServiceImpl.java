@@ -46,6 +46,7 @@ public class UserServiceImpl implements UserService {
         com.ok.demo.entity.User entityUser = new com.ok.demo.entity.User();
         entityUser.setEmail(user.getEmail());
         entityUser.setPassword(user.getPassword());
+        entityUser.setName(user.getName());
 
         userRepository.save(entityUser);
     }

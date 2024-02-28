@@ -3,10 +3,9 @@ import { LOGIN } from './types';
 
 export function loginAction(dataToSubmit) {
     const request = axios
-        .post('/api/users/login', dataToSubmit)
-        .then((res) => res.data);
+        .post('/api/users/login', dataToSubmit);
     return {
         type: LOGIN,
-        payload: true,
+        payload: request,
     };
 }

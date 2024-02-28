@@ -53,7 +53,7 @@ public class LoginPageController {
     @PostMapping("/api/users/signup")
     public ResultEntity<ApiResult> signUp(@RequestBody User user) {
 
-        if(StringUtils.isEmpty(user.getEmail()) || StringUtils.isEmpty(user.getPassword())) {
+        if(StringUtils.isEmpty(user.getEmail()) || StringUtils.isEmpty(user.getPassword()) || StringUtils.isEmpty(user.getName())) {
             return new ResultEntity<>(ApiResult.FAIL.getCode(), ApiResult.FAIL.getMessage());
         }
 

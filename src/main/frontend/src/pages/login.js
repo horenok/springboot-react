@@ -32,8 +32,9 @@ function Login() {
     }
 
     dispatch(loginAction(body)).then((res) => {
-      if (res.payload.code == '0000') {
+      if (res.payload.data.code == '0000') {
         alert("LoginSuccess");
+        movePage('/home');
       } else {
         alert("LoginFail");
       }
@@ -41,7 +42,7 @@ function Login() {
   };
 
   const onSignUpHandler = (event) => {
-    movePage('/SignUp');
+    movePage('/signup');
 
     //버튼만 누르면 리로드 되는것 막아줌
     event.preventDefault();

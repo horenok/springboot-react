@@ -3,29 +3,34 @@ import {Button} from "react-bootstrap";
 import {useDispatch} from "react-redux";
 
 import { onSignUp, emailDuplicateCheck } from "../actions/onSignUp";
+import {useNavigate} from "react-router-dom";
 
 const Signup = () => {
 
     const dispatch = useDispatch();
+    const movePage = useNavigate();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirm, setConfirm] = useState('');
+    const [name, setName] = useState('');
 
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [confirmError, setConfirmError] = useState('');
+    const [nameError, setNameError] = useState('');
 
     const [isEmailCheck, setIsEmailCheck] = useState(false); //중복 검사를 했는지 안했는지
     const [isEmailAvailable, setIsEmailAvailable] = useState(false); //아이디 사용 가능한지 아닌지
+    const [isNameCheck, setIsNameCheck] = useState(false); //이름 확인
 
     const onEmailHandler = (event) => {
         setEmail(event.currentTarget.value);
         emailCheckHandler(event.currentTarget.value);
     }
     const onPasswordHandler = (event) => {
-        const { type, value } = event.target;
-        if (type === 'password') {
+        const { id, value } = event.target;
+        if (id === 'password') {
             setPassword(value);
             passwordCheckHandler(value, confirm);
         } else {
@@ -33,22 +38,31 @@ const Signup = () => {
             passwordCheckHandler(password, value);
         }
     }
+    const onNameHandler = (event) => {
+        setName(event.currentTarget.value);
+        nameCheckHandler(event.currentTarget.value);
+    }
 
     const emailCheckHandler = async (email) => {
-        const idRegex = /^[a-z\d]{5,10}$/;
         if (email === '') {
             setEmailError('이메일을 입력해주세요.');
             setIsEmailAvailable(false);
             return false;
         }
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        if (!emailRegex.test(email)) {
+            setEmailError('이메일 형식이 아닙니다.');
+            setIsEmailAvailable(false);
+            return false;
+        }
         const responseData = await emailDuplicateCheck(email);
         if (!responseData.payload) {
-            setEmailError('사용 가능한 아이디입니다.');
+            setEmailError('사용 가능한 이메일입니다.');
             setIsEmailCheck(true);
             setIsEmailAvailable(true);
             return true;
         } else {
-            setEmailError('이미 사용중인 아이디입니다.');
+            setEmailError('이미 사용중인 이메일입니다.');
             setIsEmailAvailable(false);
             return false;
         }
@@ -68,13 +82,27 @@ const Signup = () => {
             return true;
         }
     }
+
+    const nameCheckHandler = (name) => {
+        if(name === '') {
+            setNameError('이름을 입력해주세요');
+            setIsNameCheck(false);
+            return false;
+        }else {
+            setNameError('');
+            setIsNameCheck(true);
+            return true;
+        }
+    }
+
     const onSignUpHandler = (event) => {
         //버튼만 누르면 리로드 되는것 막아줌
         event.preventDefault();
 
         let body = {
             email: email,
-            password: password
+            password: password,
+            name: name,
         }
 
         const emailCheckResult = emailCheckHandler(email);
@@ -88,6 +116,11 @@ const Signup = () => {
             return;
         }
 
+        if(!isNameCheck) {
+            alert('이름 입력을 확인해주세요.')
+            return;
+        }
+
         const passwordCheckResult = passwordCheckHandler(password, confirm);
         if(passwordCheckResult) {
             setPasswordError('');
@@ -96,7 +129,16 @@ const Signup = () => {
             return;
         }
 
-        dispatch(onSignUp(body));
+        // dispatch(onSignUp(body));
+
+        dispatch(onSignUp(body)).then((res) => {
+            if (res.payload.data.code == '0000') {
+                alert("SignUp Success");
+                movePage('/login');
+            } else {
+                alert("SignUp Fail");
+            }
+        });
     };
 
     return (
@@ -110,13 +152,17 @@ const Signup = () => {
                        style={{width: '300px', height: '30px', fontSize: '16px',}}/>
                 {emailError && <small className={isEmailAvailable ? 'idAvailable' : ''}>{emailError}</small>}
                 <label>Password</label>
-                <input type='password' value={password} onChange={onPasswordHandler}
+                <input type='password' id="password" value={password} onChange={onPasswordHandler}
                        style={{width: '300px', height: '30px', fontSize: '16px',}}/>
                 {passwordError && <small>{passwordError}</small>}
                 <label>Confirm</label>
-                <input type='confirm' value={confirm} onChange={onPasswordHandler}
+                <input type='password' id="confirm" value={confirm} onChange={onPasswordHandler}
                        style={{width: '300px', height: '30px', fontSize: '16px',}}/>
                 {confirmError && <small>{confirmError}</small>}
+                <label>Name</label>
+                <input type='text' value={name} onChange={onNameHandler}
+                       style={{width: '300px', height: '30px', fontSize: '16px',}}/>
+                {nameError && <small>{nameError}</small>}
                 <div style={{ display: 'flex', justifyContent: 'center', margin: '10px'}}>
                     <Button variant="dark" style={{margin: '5px'}} onClick={onSignUpHandler}>Sign Up</Button>
                 </div>
