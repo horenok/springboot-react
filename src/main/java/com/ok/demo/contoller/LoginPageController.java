@@ -17,22 +17,19 @@ public class LoginPageController {
         this.userService = userService;
     }
 
-    @GetMapping("/api/data")
-    public String test() {
-        return "Hello, world!";
-    }
-
     @PostMapping("/api/users/login")
-    public ResultEntity<ApiResult> login(@RequestBody User user) {
+    public ResultEntity<User> login(@RequestBody User user) {
         if(StringUtils.isEmpty(user.getEmail()) || StringUtils.isEmpty(user.getPassword())) {
             return new ResultEntity<>(ApiResult.FAIL.getCode(), ApiResult.FAIL.getMessage());
         }
 
-        if(ObjectUtils.isEmpty(userService.findUser(user))) {
+        User dtouser = userService.findUser(user);
+
+        if(ObjectUtils.isEmpty(dtouser)) {
             return new ResultEntity<>(ApiResult.FAIL.getCode(), ApiResult.FAIL.getMessage());
         }
 
-        return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage());
+        return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage(), dtouser);
     }
 
     @PostMapping("/api/users/emailDuplicate")

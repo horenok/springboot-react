@@ -12,6 +12,8 @@ export default function (state = {}, action) {
             return { ...state, emailDuplicate: action.payload };
             break;
         default:
-            return state;
+            return {
+                ...state,
+            };
     }
 }

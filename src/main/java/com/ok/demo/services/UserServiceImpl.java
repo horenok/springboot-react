@@ -24,6 +24,7 @@ public class UserServiceImpl implements UserService {
         User dtoUser = new User();
         dtoUser.setEmail(entityUser.getEmail());
         dtoUser.setPassword(entityUser.getPassword());
+        dtoUser.setName(entityUser.getName());
 
         return dtoUser;
     }
