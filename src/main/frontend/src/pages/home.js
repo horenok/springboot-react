@@ -21,9 +21,9 @@ function ColorSchemesExample() {
                         <Nav.Link href="/home">bar2</Nav.Link>
                         <Nav.Link href="/home">bar3</Nav.Link>
                     </Nav>
-                    {/*<h5 style={{ color: '#FFFFFF' }}>
+                    <h5 style={{ color: '#FFFFFF' }}>
                         { loginSuccess.data.data.name }님 안녕하세요!
-                    </h5>*/}
+                    </h5>
                 </Container>
             </Navbar>
             <pre>{JSON.stringify(allState, null, 2)}</pre>
