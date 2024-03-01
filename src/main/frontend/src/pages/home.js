@@ -1,12 +1,9 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import axios from "axios";
-import {useState} from "react";
 import {useSelector} from "react-redux";
-import {LOGIN} from "../actions/types";
 
-function ColorSchemesExample() {
+function Home() {
 
     const loginSuccess = useSelector(state => state.loginSuccess);
     const allState = useSelector(state => state);
@@ -31,4 +28,4 @@ function ColorSchemesExample() {
     );
 }
 
-export default ColorSchemesExample;
+export default Home;

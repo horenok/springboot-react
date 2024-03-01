@@ -49,7 +49,7 @@ export async function emailDuplicateCheck(email) {
                 'Content-Type': 'application/json',
             },
         });
-        if(res.data.code == "0000") {
+        if(res.data.code === '0000') {
             return {
                 type: EMAILDUPLICATE,
                 payload: true,
