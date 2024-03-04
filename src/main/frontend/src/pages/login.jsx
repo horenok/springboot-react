@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { loginAction } from "../actions/loginAction";
-
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
@@ -13,6 +12,8 @@ function Login() {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
 
+  const allState = useSelector(state => state);
+
   const onEmailHandler = (event) => {
     setEmail(event.currentTarget.value);
   }
@@ -20,8 +21,6 @@ function Login() {
     setPassword(event.currentTarget.value);
   }
   const onSignInHandler = (event) => {
-    //버튼만 누르면 리로드 되는것 막아줌
-    event.preventDefault();
 
     console.log('Email', Email);
     console.log('Password', Password);
@@ -48,6 +47,12 @@ function Login() {
     event.preventDefault();
   }
 
+  const handleOnKeyPress = (event) => {
+    if(event.key === 'Enter') {
+      onSignInHandler();
+    }
+  }
+
   return (
       <div style={{
         display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100vh'
@@ -56,10 +61,10 @@ function Login() {
           display: 'flex', flexDirection: 'column'}}>
           <label>Email</label>
           <input type="email" value={Email} onChange={onEmailHandler}
-              style={{width: '300px', height: '30px', fontSize: '16px',}}
+                 style={{width: '300px', height: '30px', fontSize: '16px',}}
           />
           <label>Password</label>
-          <input type='password' value={Password} onChange={onPasswordHandler}
+          <input type='password' value={Password} onChange={onPasswordHandler} onKeyPress={handleOnKeyPress}
                  style={{width: '300px', height: '30px', fontSize: '16px',}}
           />
           <div style={{ display: 'flex', justifyContent: 'center', margin: '10px'}}>
@@ -67,8 +72,9 @@ function Login() {
             <Button variant="dark" style={{margin: '5px'}} onClick={onSignUpHandler}>Sign Up</Button>
           </div>
         </form>
+        {<pre>{JSON.stringify(allState, null, 2)}</pre>}
       </div>
-  )
+)
 }
 
 export default Login;

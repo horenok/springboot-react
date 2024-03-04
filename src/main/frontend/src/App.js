@@ -4,7 +4,7 @@ import {Routes, Route, BrowserRouter} from 'react-router-dom';
 import Login from "./pages/login";
 import SignUp from "./pages/signup"
 import Bar1 from "./component/Bar1";
-import HomeNav from "./pages/HomeNav";
+import HomeNav from "./pages/HomeNav2";
 import {useSelector} from "react-redux";
 
 function App() {

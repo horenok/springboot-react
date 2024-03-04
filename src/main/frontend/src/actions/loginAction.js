@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOGIN } from './types';
+import {LOGIN, LOGOUT} from './types';
 
 export function loginAction(dataToSubmit) {
     const request = axios
@@ -7,5 +7,12 @@ export function loginAction(dataToSubmit) {
     return {
         type: LOGIN,
         payload: request,
+    };
+}
+
+export function logoutAction() {
+    return {
+        type: LOGOUT,
+        payload: true,
     };
 }
