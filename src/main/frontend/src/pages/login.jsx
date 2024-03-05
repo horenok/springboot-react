@@ -72,7 +72,6 @@ function Login() {
             <Button variant="dark" style={{margin: '5px'}} onClick={onSignUpHandler}>Sign Up</Button>
           </div>
         </form>
-        {<pre>{JSON.stringify(allState, null, 2)}</pre>}
       </div>
 )
 }

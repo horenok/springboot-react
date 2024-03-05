@@ -68,7 +68,7 @@ const persistor = persistStore(store);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <div style={{ background: '#000000' }} >
+    <div /*style={{ background: '#000000' }}*/ >
         <React.StrictMode>
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
