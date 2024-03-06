@@ -18,7 +18,7 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               <Route path="/bar1" element={<Bar1 />} />
           </Routes>
-          {<pre>{JSON.stringify(allState, null, 2)}</pre>};
+          {/*{<pre>{JSON.stringify(allState, null, 2)}</pre>};*/}
       </BrowserRouter>
   );
 }

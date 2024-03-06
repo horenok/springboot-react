@@ -27,7 +27,7 @@ function Bar1() {
             <div className="main_bg"/>
             <Button variant="dark" style={{margin: '30px', float: "right"}} onClick={addNewPost}> 후원글 추가 </Button>
             <Container style={{position: "relative", top: "100px"}}>
-                <Row>
+                {/*<Row>
                     <Col sm>
                         <img src={require('../images/dog1.jpeg')} className="list_img"/>
                         <h4>후원1</h4>
@@ -43,6 +43,16 @@ function Bar1() {
                         <h4>후원3</h4>
                         <p>후원설명3</p>
                     </Col>
+                </Row>*/}
+                <Row>
+                    {posts.map(post => (
+                        <Col sm key={post.id}>
+                            {/* 이미지 경로를 동적으로 설정 */}
+                            <img src={post.imgSrc} className="list_img" alt={post.title} />
+                            <h4>{post.title}</h4>
+                            <p>{post.description}</p>
+                        </Col>
+                    ))}
                 </Row>
             </Container>
         </>
