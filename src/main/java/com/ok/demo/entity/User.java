@@ -40,6 +40,10 @@ public class User extends AuditableEntity {
     @Column(name = "LOGIN_FAIL_COUNT")
     private Integer loginFailCount = 0;
 
+    //총 후원금액
+    @Column(name = "ALL_AMOUNT")
+    private Long allAmount;
+
     public String getEmail() {
         return email;
     }
@@ -78,5 +82,13 @@ public class User extends AuditableEntity {
 
     public void setLoginFailCount(Integer loginFailCount) {
         this.loginFailCount = loginFailCount;
+    }
+
+    public Long getAllAmount() {
+        return allAmount;
+    }
+
+    public void setAllAmount(Long allAmount) {
+        this.allAmount = allAmount;
     }
 }

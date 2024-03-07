@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService {
         dtoUser.setEmail(entityUser.getEmail());
         dtoUser.setPassword(entityUser.getPassword());
         dtoUser.setName(entityUser.getName());
+        dtoUser.setAllAmount(entityUser.getAllAmount());
 
         return dtoUser;
     }
@@ -48,6 +49,7 @@ public class UserServiceImpl implements UserService {
         entityUser.setEmail(user.getEmail());
         entityUser.setPassword(user.getPassword());
         entityUser.setName(user.getName());
+        entityUser.setAllAmount(user.getAllAmount());
 
         userRepository.save(entityUser);
     }

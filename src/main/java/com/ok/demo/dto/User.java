@@ -7,6 +7,7 @@ public class User implements Serializable {
     private String email;
     private String password;
     private String name;
+    private Long allAmount;
 
     public String getEmail() {
         return email;
@@ -30,5 +31,13 @@ public class User implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getAllAmount() {
+        return allAmount;
+    }
+
+    public void setAllAmount(Long allAmount) {
+        this.allAmount = allAmount;
     }
 }
