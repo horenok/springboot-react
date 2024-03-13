@@ -1,7 +1,7 @@
 package com.ok.demo.services;
 
 import com.ok.demo.dto.BackingName;
-import com.ok.demo.dto.User;
+import com.ok.demo.entity.Backing;
 import com.ok.demo.repository.BackingRepository;
 import com.ok.demo.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -23,14 +23,14 @@ public class BackingServiceImpl implements BackingService {
     @Override
     public List<BackingName> findAll() {
 
-        List<com.ok.demo.entity.BackingName> entitybl = backingRepository.findAll();
+        List<Backing> entitybl = backingRepository.findAll();
         if(ObjectUtils.isEmpty(entitybl)) {
             return null;
         }
 
         List<BackingName> bl = new ArrayList<>();
 
-        for (com.ok.demo.entity.BackingName data : entitybl) {
+        for (Backing data : entitybl) {
             BackingName backingName = new BackingName();
             backingName.setBackingName(data.getBackingName());
             backingName.setBackingExplanation(data.getBackingExplanation());

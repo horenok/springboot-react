@@ -1,15 +1,17 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Button, Col, Row} from "react-bootstrap";
 
-import '../css/bar1.css';
+import '../css/BackingList.css';
 import Container from "react-bootstrap/Container";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
-function Bar1() {
+/*function BackingList() {
 
     const [posts, setPosts] = useState([
-        { id: 1, imgSrc: require('../images/dog1.jpeg'), title: '후원1', description: '후원설명1' },
+        /!*{ id: 1, imgSrc: require('../images/dog1.jpeg'), title: '후원1', description: '후원설명1' },
         { id: 2, imgSrc: require('../images/dog2.jpeg'), title: '후원2', description: '후원설명2' },
-        { id: 3, imgSrc: require('../images/dog3.jpeg'), title: '후원3', description: '후원설명3' }
+        { id: 3, imgSrc: require('../images/dog3.jpeg'), title: '후원3', description: '후원설명3' }*!/
     ]);
 
     const addNewPost = () => {
@@ -27,7 +29,7 @@ function Bar1() {
             <div className="main_bg"/>
             <Button variant="dark" style={{margin: '30px', float: "right"}} onClick={addNewPost}> 후원글 추가 </Button>
             <Container style={{position: "relative", top: "100px"}}>
-                {/*<Row>
+                {/!*<Row>
                     <Col sm>
                         <img src={require('../images/dog1.jpeg')} className="list_img"/>
                         <h4>후원1</h4>
@@ -43,11 +45,11 @@ function Bar1() {
                         <h4>후원3</h4>
                         <p>후원설명3</p>
                     </Col>
-                </Row>*/}
+                </Row>*!/}
                 <Row>
                     {posts.map(post => (
                         <Col sm key={post.id}>
-                            {/* 이미지 경로를 동적으로 설정 */}
+                            {/!* 이미지 경로를 동적으로 설정 *!/}
                             <img src={post.imgSrc} className="list_img" alt={post.title} />
                             <h4>{post.title}</h4>
                             <p>{post.description}</p>
@@ -57,6 +59,46 @@ function Bar1() {
             </Container>
         </>
     )
+}*/
+
+function BackingList() {
+    const movePage = useNavigate();
+
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        axios.get("/api/backing/getlist")
+            .then(response => {
+                setPosts(response.data);
+            })
+            .catch(error => {
+                console.error("Error fetching posts:", error);
+            });
+    }, []);
+
+    const addNewPost = () => {
+        /*const newPost = {
+            id: posts.length + 1,
+            imgSrc: require('../images/dog1.jpeg'),
+            title: '새로운 후원',
+            description: '새로운 후원 설명'
+        };
+        setPosts([...posts, newPost]);*/
+        movePage('/addBacking');
+    }
+
+    return (
+        <div>
+            <Button variant="dark" style={{margin: '30px', float: "right"}} onClick={addNewPost}> 후원글 추가 </Button>
+            {posts.map(post => (
+                <div key={post.id}>
+                    <h2>{post.title}</h2>
+                    <p>{post.content}</p>
+                    <img src={`/api/posts/images/${post.imageFilename}`} alt={post.title} />
+                </div>
+            ))}
+        </div>
+    );
 }
 
-export default Bar1;
+export default BackingList;

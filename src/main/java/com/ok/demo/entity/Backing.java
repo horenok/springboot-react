@@ -3,10 +3,7 @@ package com.ok.demo.entity;
 import com.ok.demo.common.entity.AuditableEntity;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import static com.ok.demo.constants.SchemaConstants.TABLE_PREFIX;
 
@@ -18,45 +15,21 @@ import static com.ok.demo.constants.SchemaConstants.TABLE_PREFIX;
 public class Backing extends AuditableEntity {
     private static final long serialVersionUID = 76128921921475252L;
 
-    //이메일
-    @Column(length = 100, unique = true, nullable = false)
-    private String email;
-
-    //이름
-    @Column(name = "FULL_NAME", length = 50)
-    private String name;
-
-    //후원금액
-    @Column(name = "AMOUNT")
-    private Long amount;
-
     //후원명
-    @Column(name = "BACKING_NAME", length = 100)
+    @Column(length = 300, unique = true, nullable = false)
     private String backingName;
 
-    public String getEmail() {
-        return email;
-    }
+    //총 후원금액
+    @Column(name = "ALL_AMOUNT")
+    private Long allAmount;
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    //후원등록자
+    @Column(name = "BACKING_REGISTRANT", length = 100)
+    private String backingRegistrant;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Long amount) {
-        this.amount = amount;
-    }
+    //후원설명
+    @Column(name = "BACKING_EXPLANATION", length = 500)
+    private String backingExplanation;
 
     public String getBackingName() {
         return backingName;
@@ -64,5 +37,29 @@ public class Backing extends AuditableEntity {
 
     public void setBackingName(String backingName) {
         this.backingName = backingName;
+    }
+
+    public Long getAllAmount() {
+        return allAmount;
+    }
+
+    public void setAllAmount(Long allAmount) {
+        this.allAmount = allAmount;
+    }
+
+    public String getBackingRegistrant() {
+        return backingRegistrant;
+    }
+
+    public void setBackingRegistrant(String backingRegistrant) {
+        this.backingRegistrant = backingRegistrant;
+    }
+
+    public String getBackingExplanation() {
+        return backingExplanation;
+    }
+
+    public void setBackingExplanation(String backingExplanation) {
+        this.backingExplanation = backingExplanation;
     }
 }

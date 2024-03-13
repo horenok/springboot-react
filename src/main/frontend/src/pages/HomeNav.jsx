@@ -19,7 +19,7 @@ function Home() {
                 <Container>
                     <Navbar.Brand href="/home">OK</Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link href="/home">bar1</Nav.Link>
+                        <Nav.Link href="/home">BackingList</Nav.Link>
                         <Nav.Link href="/home">bar2</Nav.Link>
                         <Nav.Link href="/home">bar3</Nav.Link>
                     </Nav>
@@ -63,8 +63,8 @@ class HomeNav extends Component {
                     <Container>
                         <Navbar.Brand href="/">OK</Navbar.Brand>
                         <Nav className="me-auto">
-                            <LinkContainer to="/bar1">
-                                <Nav.Link>bar1</Nav.Link>
+                            <LinkContainer to="/backingList">
+                                <Nav.Link>BackingList</Nav.Link>
                             </LinkContainer>
                             <LinkContainer to="/bar2">
                                 <Nav.Link>bar2</Nav.Link>
@@ -73,7 +73,7 @@ class HomeNav extends Component {
                                 <Nav.Link>bar3</Nav.Link>
                             </LinkContainer>
                         </Nav>
-                        {this.props.loginSuccess.data.code === '0000' && this.props.isLoggedIn === true ? (
+                        {/*{this.props.loginSuccess.data.code === '0000' && this.props.isLoggedIn === true ? (
                             <>
                                 <h5 style={{color: "#FFFFFF", padding: "7px", margin: "0px"}}>
                                     {this.props.loginSuccess.data.data.name}님 안녕하세요!
@@ -85,7 +85,7 @@ class HomeNav extends Component {
                         ) : (
                             <LinkContainer style={{ color: '#FFFFFF' , padding: "7px"}} to="/login">
                                 <Nav.Link style={{ color: '#FFFFFF' }}>Login</Nav.Link>
-                            </LinkContainer>)}
+                            </LinkContainer>)}*/}
                     </Container>
                 </Navbar>
             </>
