@@ -1,11 +1,12 @@
 package com.ok.demo.contoller;
 
 import com.ok.demo.common.ResultEntity;
+import com.ok.demo.dto.Backing;
 import com.ok.demo.dto.BackingName;
 import com.ok.demo.services.BackingService;
 import com.ok.demo.type.user.ApiResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -23,6 +24,22 @@ public class BackingController {
         List<BackingName> bl = backingService.findAll();
 
         return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage(), bl);
+    }
+
+    @PostMapping("/api/backing/addnewbacking")
+    @ResponseBody
+    public ResultEntity<ApiResult> addNewBacking(@RequestParam("imagePath") MultipartFile file,
+                                                 @RequestParam("backingName") String backingName,
+                                                 @RequestParam("backingExplanation") String backingExplanation) {
+
+        Backing backing = new Backing();
+        backing.setImagePath(file);
+        backing.setBackingName(backingName);
+        backing.setBackingExplanation(backingExplanation);
+
+        backingService.
+
+        return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage());
     }
 
     /*@PostMapping("/api/users/login")

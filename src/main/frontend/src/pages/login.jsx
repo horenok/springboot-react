@@ -22,9 +22,6 @@ function Login() {
   }
   const onSignInHandler = (event) => {
 
-    console.log('Email', Email);
-    console.log('Password', Password);
-
     let body = {
       email: Email,
       password: Password

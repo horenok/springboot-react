@@ -1,5 +1,7 @@
 package com.ok.demo.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.Serializable;
 
 public class Backing implements Serializable {
@@ -8,6 +10,8 @@ public class Backing implements Serializable {
     private String name;
     private String amount;
     private String backingName;
+    private String backingExplanation;
+    private MultipartFile imagePath;
 
     public String getEmail() {
         return email;
@@ -39,5 +43,21 @@ public class Backing implements Serializable {
 
     public void setBackingName(String backingName) {
         this.backingName = backingName;
+    }
+
+    public String getBackingExplanation() {
+        return backingExplanation;
+    }
+
+    public void setBackingExplanation(String backingExplanation) {
+        this.backingExplanation = backingExplanation;
+    }
+
+    public MultipartFile getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(MultipartFile imagePath) {
+        this.imagePath = imagePath;
     }
 }

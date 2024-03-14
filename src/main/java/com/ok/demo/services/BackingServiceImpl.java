@@ -43,4 +43,10 @@ public class BackingServiceImpl implements BackingService {
         return bl;
     }
 
+    @Override
+    public boolean addNewBacking(com.ok.demo.dto.Backing backing) {
+
+        return true;
+    }
+
 }
