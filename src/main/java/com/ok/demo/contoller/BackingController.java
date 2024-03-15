@@ -37,7 +37,10 @@ public class BackingController {
         backing.setBackingName(backingName);
         backing.setBackingExplanation(backingExplanation);
 
-        backingService.
+        boolean bsresult = backingService.addNewBacking(backing);
+        if(!bsresult) {
+            return new ResultEntity<>(ApiResult.FAIL.getCode(), ApiResult.FAIL.getMessage());
+        }
 
         return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage());
     }

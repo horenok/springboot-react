@@ -31,6 +31,14 @@ public class Backing extends AuditableEntity {
     @Column(name = "BACKING_EXPLANATION", length = 500)
     private String backingExplanation;
 
+    //이미지파일 이름
+    @Column(name = "IMAGE_NAME", length = 150)
+    private String imageName;
+
+    //이미지파일 경로
+    @Column(name = "IMAGE_PATH", length = 300)
+    private String imagePath;
+
     public String getBackingName() {
         return backingName;
     }
@@ -61,5 +69,21 @@ public class Backing extends AuditableEntity {
 
     public void setBackingExplanation(String backingExplanation) {
         this.backingExplanation = backingExplanation;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }
