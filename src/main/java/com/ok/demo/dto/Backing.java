@@ -6,36 +6,12 @@ import java.io.Serializable;
 
 public class Backing implements Serializable {
     private static final long serialVersionUID = 3216857324585327L;
-    private String email;
-    private String name;
-    private String amount;
     private String backingName;
+    private Long allAmount;
+    private String backingRegistrant;
     private String backingExplanation;
-    private MultipartFile imagePath;
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAmount() {
-        return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
+    private String imageName;
+    private String imagePath;
 
     public String getBackingName() {
         return backingName;
@@ -43,6 +19,22 @@ public class Backing implements Serializable {
 
     public void setBackingName(String backingName) {
         this.backingName = backingName;
+    }
+
+    public Long getAllAmount() {
+        return allAmount;
+    }
+
+    public void setAllAmount(Long allAmount) {
+        this.allAmount = allAmount;
+    }
+
+    public String getBackingRegistrant() {
+        return backingRegistrant;
+    }
+
+    public void setBackingRegistrant(String backingRegistrant) {
+        this.backingRegistrant = backingRegistrant;
     }
 
     public String getBackingExplanation() {
@@ -53,11 +45,19 @@ public class Backing implements Serializable {
         this.backingExplanation = backingExplanation;
     }
 
-    public MultipartFile getImagePath() {
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public String getImagePath() {
         return imagePath;
     }
 
-    public void setImagePath(MultipartFile imagePath) {
+    public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
     }
 }

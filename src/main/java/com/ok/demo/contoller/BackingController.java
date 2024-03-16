@@ -28,14 +28,14 @@ public class BackingController {
 
     @PostMapping("/api/backing/addnewbacking")
     @ResponseBody
-    public ResultEntity<ApiResult> addNewBacking(@RequestParam("imagePath") MultipartFile file,
+    public ResultEntity<ApiResult> addNewBacking(@RequestBody Backing backing, MultipartFile file/*@RequestParam("imagePath") MultipartFile file,
                                                  @RequestParam("backingName") String backingName,
-                                                 @RequestParam("backingExplanation") String backingExplanation) {
+                                                 @RequestParam("backingExplanation") String backingExplanation*/) {
 
-        Backing backing = new Backing();
+        /*Backing backing = new Backing();
         backing.setImagePath(file);
         backing.setBackingName(backingName);
-        backing.setBackingExplanation(backingExplanation);
+        backing.setBackingExplanation(backingExplanation);*/
 
         boolean bsresult = backingService.addNewBacking(backing);
         if(!bsresult) {

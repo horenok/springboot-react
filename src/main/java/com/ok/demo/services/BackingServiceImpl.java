@@ -4,6 +4,7 @@ import com.ok.demo.dto.BackingName;
 import com.ok.demo.entity.Backing;
 import com.ok.demo.repository.BackingRepository;
 import com.ok.demo.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -14,6 +15,9 @@ import java.util.List;
 public class BackingServiceImpl implements BackingService {
     private final UserRepository userRepository;
     private final BackingRepository backingRepository;
+
+    @Value("${upload.path}")
+    private String uploadPath;
 
     public BackingServiceImpl(UserRepository userRepository, BackingRepository backingRepository) {
         this.userRepository = userRepository;
