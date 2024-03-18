@@ -7,8 +7,7 @@ import java.io.Serializable;
 public class Backing implements Serializable {
     private static final long serialVersionUID = 3216857324585327L;
     private String backingName;
-    private Long allAmount;
-    private String backingRegistrant;
+    private Long allAmount = 0L;
     private String backingExplanation;
     private String imageName;
     private String imagePath;
@@ -27,14 +26,6 @@ public class Backing implements Serializable {
 
     public void setAllAmount(Long allAmount) {
         this.allAmount = allAmount;
-    }
-
-    public String getBackingRegistrant() {
-        return backingRegistrant;
-    }
-
-    public void setBackingRegistrant(String backingRegistrant) {
-        this.backingRegistrant = backingRegistrant;
     }
 
     public String getBackingExplanation() {

@@ -69,7 +69,7 @@ function BackingList() {
     useEffect(() => {
         axios.get("/api/backing/getlist")
             .then(response => {
-                setPosts(response.data);
+                setPosts(response.data.data);
             })
             .catch(error => {
                 console.error("Error fetching posts:", error);
@@ -90,11 +90,18 @@ function BackingList() {
     return (
         <div>
             <Button variant="dark" style={{margin: '30px', float: "right"}} onClick={addNewPost}> 후원글 추가 </Button>
-            {posts.map(post => (
+            {/*{posts.map(post => (
                 <div key={post.id}>
-                    <h2>{post.title}</h2>
-                    <p>{post.content}</p>
-                    <img src={`/api/posts/images/${post.imageFilename}`} alt={post.title} />
+                    <h2>{post.backingName}</h2>
+                    <p>{post.backingExplanation}</p>
+                    <img src={post.imagePath} />
+                </div>
+            ))}*/}
+            {posts.map((post, index) => (
+                <div key={index}>
+                    <h2>{post.backingName}</h2>
+                    <p>{post.backingExplanation}</p>
+                    <img src={post.imagePath} />
                 </div>
             ))}
         </div>

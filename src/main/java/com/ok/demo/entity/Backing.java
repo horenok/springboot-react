@@ -21,11 +21,7 @@ public class Backing extends AuditableEntity {
 
     //총 후원금액
     @Column(name = "ALL_AMOUNT")
-    private Long allAmount;
-
-    //후원등록자
-    @Column(name = "BACKING_REGISTRANT", length = 100)
-    private String backingRegistrant;
+    private Long allAmount = 0L;
 
     //후원설명
     @Column(name = "BACKING_EXPLANATION", length = 500)
@@ -53,14 +49,6 @@ public class Backing extends AuditableEntity {
 
     public void setAllAmount(Long allAmount) {
         this.allAmount = allAmount;
-    }
-
-    public String getBackingRegistrant() {
-        return backingRegistrant;
-    }
-
-    public void setBackingRegistrant(String backingRegistrant) {
-        this.backingRegistrant = backingRegistrant;
     }
 
     public String getBackingExplanation() {
