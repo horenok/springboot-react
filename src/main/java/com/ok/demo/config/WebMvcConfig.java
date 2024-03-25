@@ -20,7 +20,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/images/**")
-                .addResourceLocations("/src/main/frontend/src/images/");
+        registry.addResourceHandler("/api/backing/images/**")
+                .addResourceLocations("file:/Users/OK/Documents/springboot-react/src/main/resources/static/");
     }
 }

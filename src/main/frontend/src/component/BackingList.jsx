@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react";
 import {Button, Col, Row} from "react-bootstrap";
 
 import '../css/BackingList.css';
-import Container from "react-bootstrap/Container";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 
@@ -66,7 +65,7 @@ function BackingList() {
 
     const [posts, setPosts] = useState([]);
 
-    useEffect(() => {
+    /*useEffect(() => {
         axios.get("/api/backing/getlist")
             .then(response => {
                 setPosts(response.data.data);
@@ -74,36 +73,41 @@ function BackingList() {
             .catch(error => {
                 console.error("Error fetching posts:", error);
             });
+    }, []);*/
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // 서버로부터 데이터를 가져옵니다.
+                const response = await axios.get('/api/backing/getlist');
+                // 상태를 업데이트합니다.
+                setPosts(response.data.data);
+            } catch (error) {
+                console.error('데이터를 가져오는데 실패했습니다.', error);
+            }
+        };
+
+        fetchData();
     }, []);
 
     const addNewPost = () => {
-        /*const newPost = {
-            id: posts.length + 1,
-            imgSrc: require('../images/dog1.jpeg'),
-            title: '새로운 후원',
-            description: '새로운 후원 설명'
-        };
-        setPosts([...posts, newPost]);*/
         movePage('/addBacking');
     }
 
     return (
         <div>
-            <Button variant="dark" style={{margin: '30px', float: "right"}} onClick={addNewPost}> 후원글 추가 </Button>
-            {/*{posts.map(post => (
-                <div key={post.id}>
-                    <h2>{post.backingName}</h2>
-                    <p>{post.backingExplanation}</p>
-                    <img src={post.imagePath} />
-                </div>
-            ))}*/}
-            {posts.map((post, index) => (
-                <div key={index}>
-                    <h2>{post.backingName}</h2>
-                    <p>{post.backingExplanation}</p>
-                    <img src={post.imagePath} />
-                </div>
-            ))}
+            <div className="button-container">
+                <Button variant="dark" style={{margin: '30px'}} onClick={addNewPost}> 후원글 추가 </Button>
+            </div>
+            <div className="post-container">
+                {posts.map((post, index) => (
+                    <div key={index}>
+                        <h2>{post.backingName}</h2>
+                        <p>{post.backingExplanation}</p>
+                        <img src={"/api/backing/image?imagePath=" + post.imagePath} alt={post.imageName} />
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }

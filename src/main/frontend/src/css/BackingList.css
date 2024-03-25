@@ -13,3 +13,13 @@
     padding: 0px;
     border:1px solid #000000;
 }
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.post-container {
+    /* 포스트 스타일링 */
+}

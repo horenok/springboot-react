@@ -21,4 +21,4 @@ spring:
       ddl-auto: update
 
 upload:
-  path: /Users/OK/Documents/springboot-react/src/main/frontend/src/images
+  path: /Users/OK/Documents/springboot-react/src/main/resources/static/images
