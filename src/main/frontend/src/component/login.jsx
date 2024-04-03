@@ -30,7 +30,7 @@ function Login() {
     dispatch(loginAction(body)).then((res) => {
       if (res.payload.data.code == '0000') {
         alert("LoginSuccess");
-        movePage('/home');
+        movePage('/');
       } else {
         alert("LoginFail");
       }

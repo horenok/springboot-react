@@ -45,59 +45,60 @@ import {connect, useDispatch, useSelector} from "react-redux";
 import {logoutAction} from "../actions/loginAction";
 import localStorage from 'redux-persist/lib/storage';
 
-class HomeNav extends Component {
+function HomeNav() {
 
-    Logout = (event) => {
+    const allState = useSelector(state => state);
+    const dispatch = useDispatch();
+
+    const Logout = (event) => {
         event.preventDefault();
-        localStorage.removeItem('loginSuccess');
-        this.props.dispatch(logoutAction());
+        dispatch(logoutAction());
+        window.location.reload();
     }
-    loginSuccess;
-    isLoggedIn;
 
-    render() {
+    return (
+        <>
+            <Navbar bg="dark" data-bs-theme="dark">
+                <Container>
+                    <Navbar.Brand href="/">OK</Navbar.Brand>
+                    <Nav className="me-auto">
+                        <LinkContainer to="/backingList">
+                            <Nav.Link>BackingList</Nav.Link>
+                        </LinkContainer>
+                        <LinkContainer to="/bar2">
+                            <Nav.Link>bar2</Nav.Link>
+                        </LinkContainer>
+                        <LinkContainer to="/bar3">
+                            <Nav.Link>bar3</Nav.Link>
+                        </LinkContainer>
+                    </Nav>
 
-        return (
-            <>
-                <Navbar bg="dark" data-bs-theme="dark">
-                    <Container>
-                        <Navbar.Brand href="/">OK</Navbar.Brand>
-                        <Nav className="me-auto">
-                            <LinkContainer to="/backingList">
-                                <Nav.Link>BackingList</Nav.Link>
+                    {allState.loginSuccess.data.code === '0000' && allState.isLoggedIn === true ? (
+                        <>
+                            <h5 style={{color: "#FFFFFF", padding: "7px", margin: "0px"}}>
+                                {allState.loginSuccess.data.data.name}님 안녕하세요!
+                            </h5>
+                            <LinkContainer style={{ color: '#FFFFFF', padding: "7px"}} to="/login" onClick={Logout}>
+                                <Nav.Link>Logout</Nav.Link>
                             </LinkContainer>
-                            <LinkContainer to="/bar2">
-                                <Nav.Link>bar2</Nav.Link>
-                            </LinkContainer>
-                            <LinkContainer to="/bar3">
-                                <Nav.Link>bar3</Nav.Link>
-                            </LinkContainer>
-                        </Nav>
-                        {/*{this.props.loginSuccess.data.code === '0000' && this.props.isLoggedIn === true ? (
-                            <>
-                                <h5 style={{color: "#FFFFFF", padding: "7px", margin: "0px"}}>
-                                    {this.props.loginSuccess.data.data.name}님 안녕하세요!
-                                </h5>
-                                <LinkContainer style={{ color: '#FFFFFF', padding: "7px"}} to="/login" onClick={this.Logout}>
-                                    <Nav.Link>Logout</Nav.Link>
-                                </LinkContainer>
-                            </>
-                        ) : (
-                            <LinkContainer style={{ color: '#FFFFFF' , padding: "7px"}} to="/login">
-                                <Nav.Link style={{ color: '#FFFFFF' }}>Login</Nav.Link>
-                            </LinkContainer>)}*/}
-                    </Container>
-                </Navbar>
-            </>
-        );
-    }
+                        </>
+                    ) : (
+                        <LinkContainer style={{ color: '#FFFFFF' , padding: "7px"}} to="/login">
+                            <Nav.Link style={{ color: '#FFFFFF' }}>Login</Nav.Link>
+                        </LinkContainer>)}
+                </Container>
+            </Navbar>
+        </>
+    );
 }
 
-function mapStateToProps(state) {
+/*function mapStateToProps(state) {
     return {
         loginSuccess: state.loginSuccess, // 로그인 상태를 가져옵니다.
         isLoggedIn: state.isLoggedIn,
+        state: state,
     };
-}
+}*/
 
-export default connect(mapStateToProps)(HomeNav);
+// export default connect(mapStateToProps)(HomeNav);
+export default HomeNav;
