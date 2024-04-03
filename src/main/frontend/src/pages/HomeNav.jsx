@@ -43,7 +43,6 @@ import Navbar from "react-bootstrap/Navbar";
 import { LinkContainer } from "react-router-bootstrap";
 import {connect, useDispatch, useSelector} from "react-redux";
 import {logoutAction} from "../actions/loginAction";
-import localStorage from 'redux-persist/lib/storage';
 
 function HomeNav() {
 
@@ -73,7 +72,7 @@ function HomeNav() {
                         </LinkContainer>
                     </Nav>
 
-                    {allState.loginSuccess.data.code === '0000' && allState.isLoggedIn === true ? (
+                    {allState.loginSuccess?.data.code === '0000' && allState.isLoggedIn === true ? (
                         <>
                             <h5 style={{color: "#FFFFFF", padding: "7px", margin: "0px"}}>
                                 {allState.loginSuccess.data.data.name}님 안녕하세요!
@@ -91,14 +90,4 @@ function HomeNav() {
         </>
     );
 }
-
-/*function mapStateToProps(state) {
-    return {
-        loginSuccess: state.loginSuccess, // 로그인 상태를 가져옵니다.
-        isLoggedIn: state.isLoggedIn,
-        state: state,
-    };
-}*/
-
-// export default connect(mapStateToProps)(HomeNav);
 export default HomeNav;
