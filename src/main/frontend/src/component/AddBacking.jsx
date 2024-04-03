@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {Button, Col, Row} from "react-bootstrap";
 
-import '../css/BackingList.css';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 
@@ -19,7 +18,8 @@ function BackingList() {
         setBackingExplanation(event.currentTarget.value);
     }
 
-    const onFileChange = (event) => {
+    const onFileChangeHandler = (event) => {
+        event.preventDefault();
         setImagePath(event.target.files[0]);
     }
 
@@ -31,15 +31,24 @@ function BackingList() {
             imagePath: ImagePath,
         }
 
+        if(body.backingName === "" || body.backingExplanation === "") {
+            alert("후원명 혹은 후원에 대한 설명이 입력되지 않았습니다.");
+            return;
+        }
+        if(body.imagePath === null) {
+            alert("이미지를 선택해주세요");
+            return;
+        }
+
         axios.post('/api/backing/addnewbacking', body, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
         }).
-            then((res) =>{
-                if(res.data.code === '0000') {
-                    movePage('/backingList')
-                }
+        then((res) =>{
+            if(res.data.code === '0000') {
+                movePage('/backingList')
+            }
         })
     }
 
@@ -57,7 +66,7 @@ function BackingList() {
                 <textarea type='text' value={BackingExplanation} onChange={onBackingExplanationHandler}
                        style={{/*width: '300px', height: '30px', */fontSize: '16px', marginBottom: '5px'}}
                 />
-                <input type="file" accept="image/*" onChange={onFileChange}
+                <input type="file" accept="image/*" onChange={onFileChangeHandler}
                        style={{width: '300px', height: '30px', fontSize: '16px', marginTop: '10px'}}/>
                 <div style={{ display: 'flex', justifyContent: 'center', margin: '10px'}}>
                     <Button variant="dark" style={{margin: '5px', marginLeft: 'auto'}} onClick={onAddHandler}>추가</Button>
