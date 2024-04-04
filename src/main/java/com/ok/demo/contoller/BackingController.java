@@ -23,6 +23,7 @@ import java.nio.file.Files;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/backing")
 public class BackingController {
     private final BackingService backingService;
 
@@ -33,7 +34,7 @@ public class BackingController {
         this.backingService = backingService;
     }
 
-    @GetMapping("/api/backing/getlist")
+    @GetMapping("/getlist")
     public ResultEntity<List<Backing>> getList() {
 
         List<Backing> bl = backingService.findAll();
@@ -41,13 +42,13 @@ public class BackingController {
         return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage(), bl);
     }
 
-    @GetMapping("/api/backing/image")
+    @GetMapping("/image")
     public ResponseEntity<?> returnImage(@RequestParam String imagePath) {
         Resource resource = new FileSystemResource(imagePath);
         return new ResponseEntity<>(resource, HttpStatus.OK);
     }
 
-    @PostMapping("/api/backing/addnewbacking")
+    @PostMapping("/addnewbacking")
     @ResponseBody
     public ResultEntity<ApiResult> addNewBacking(@RequestParam("imagePath") MultipartFile file,
                                                  @RequestParam("backingName") String backingName,

@@ -9,6 +9,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/users")
 public class LoginPageController {
 
     private final UserService userService;
@@ -17,7 +18,7 @@ public class LoginPageController {
         this.userService = userService;
     }
 
-    @PostMapping("/api/users/login")
+    @PostMapping("/login")
     public ResultEntity<User> login(@RequestBody User user) {
         if(StringUtils.isEmpty(user.getEmail()) || StringUtils.isEmpty(user.getPassword())) {
             return new ResultEntity<>(ApiResult.FAIL.getCode(), ApiResult.FAIL.getMessage());
@@ -32,7 +33,7 @@ public class LoginPageController {
         return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage(), dtouser);
     }
 
-    @PostMapping("/api/users/emailDuplicate")
+    @PostMapping("/emailDuplicate")
     public ResultEntity<ApiResult> emailDuplicate(@RequestBody String email) {
         email = email.replaceAll("^\"|\"$", "");
 
@@ -47,7 +48,7 @@ public class LoginPageController {
         return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage());
     }
 
-    @PostMapping("/api/users/signup")
+    @PostMapping("/signup")
     public ResultEntity<ApiResult> signUp(@RequestBody User user) {
 
         if(StringUtils.isEmpty(user.getEmail()) || StringUtils.isEmpty(user.getPassword()) || StringUtils.isEmpty(user.getName())) {

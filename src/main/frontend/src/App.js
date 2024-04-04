@@ -3,10 +3,11 @@ import React from 'react';
 import {Routes, Route, BrowserRouter} from 'react-router-dom';
 import Login from "./component/login";
 import SignUp from "./component/signup"
-import BackingList from "./component/BackingList";
+import BackingList from "./component/backingList";
 import HomeNav from "./pages/HomeNav";
 import {useSelector} from "react-redux";
-import AddBacking from "./component/AddBacking";
+import AddBacking from "./component/addBacking";
+import UserBackingInfo from "./component/userBackingInfo";
 
 function App() {
     const allState = useSelector(state => state);
@@ -20,7 +21,9 @@ function App() {
                 <Route path="/signup" element={<SignUp/>}/>
                 <Route path="/backingList" element={<BackingList/>}/>
                 <Route path="/addBacking" element={<AddBacking/>}/>
+                <Route path="/userBackingInfo" element={<UserBackingInfo/>}/>
             </Routes>
+            <UserBackingInfo/>
             {<pre>{JSON.stringify(allState, null, 2)}</pre>};
         </BrowserRouter>
     );
