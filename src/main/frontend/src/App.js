@@ -1,6 +1,7 @@
 
 import React from 'react';
 import {Routes, Route, BrowserRouter} from 'react-router-dom';
+import Home from "./component/home";
 import Login from "./component/login";
 import SignUp from "./component/signup"
 import BackingList from "./component/backingList";
@@ -16,15 +17,15 @@ function App() {
         <BrowserRouter>
             <HomeNav/>
             <Routes>
-                <Route path="/"/>
+                <Route path="/" element={<Home/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/signup" element={<SignUp/>}/>
                 <Route path="/backingList" element={<BackingList/>}/>
                 <Route path="/addBacking" element={<AddBacking/>}/>
                 <Route path="/userBackingInfo" element={<UserBackingInfo/>}/>
             </Routes>
-            <UserBackingInfo/>
-            {<pre>{JSON.stringify(allState, null, 2)}</pre>};
+            {/*<UserBackingInfo/>*/}
+            {/*{<pre>{JSON.stringify(allState, null, 2)}</pre>};*/}
         </BrowserRouter>
     );
 }

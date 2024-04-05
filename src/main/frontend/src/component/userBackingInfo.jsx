@@ -32,7 +32,7 @@ function BackingList() {
 
     return (
         <div style={{
-            display: 'flex', width: '20%', height: '20vh', position: 'absolute', right: '0px', margin: '30px', borderStyle: "solid"
+            display: 'flex', width: '20%', height: '30vh', position: 'absolute', right: '0px', margin: '30px', borderStyle: "solid"
         }}>
 
             {allState.loginSuccess?.data.code === '0000' && allState.isLoggedIn === true ? (
