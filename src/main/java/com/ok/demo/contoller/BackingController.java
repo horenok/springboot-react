@@ -2,7 +2,9 @@ package com.ok.demo.contoller;
 
 import com.ok.demo.common.ResultEntity;
 import com.ok.demo.dto.Backing;
+import com.ok.demo.dto.User;
 import com.ok.demo.services.BackingService;
+import com.ok.demo.services.UserService;
 import com.ok.demo.type.user.ApiResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +19,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.xml.transform.Result;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -25,12 +28,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/backing")
 public class BackingController {
+    private final UserService userService;
     private final BackingService backingService;
 
     @Value("${upload.path}")
     private String uploadPath;
 
-    public BackingController(BackingService backingService) {
+    public BackingController(UserService userService, BackingService backingService) {
+        this.userService = userService;
         this.backingService = backingService;
     }
 
@@ -66,4 +71,12 @@ public class BackingController {
 
         return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage());
     }
+
+    @PostMapping("/backing")
+    public ResultEntity<ApiResult> backing(@RequestParam Long userId, @RequestParam Long backingAmount) {
+        User user = userService.findUser(userId);
+        backingService.save(user, backingAmount);
+        return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage());
+    }
+
 }

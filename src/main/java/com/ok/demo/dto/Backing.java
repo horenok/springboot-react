@@ -6,11 +6,20 @@ import java.io.Serializable;
 
 public class Backing implements Serializable {
     private static final long serialVersionUID = 3216857324585327L;
+    private Long id = 0L;
     private String backingName;
     private Long allAmount = 0L;
     private String backingExplanation;
     private String imageName;
     private String imagePath;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getBackingName() {
         return backingName;

@@ -32,6 +32,14 @@
     margin: 100px; /* 요소들 사이의 간격을 위해 마진을 추가합니다 */
 }
 
+.post-container > div > div {
+    display: flex;
+}
+
+.post-container > div > div > button{
+    margin-left: auto;
+}
+
 .post-container > div > img {
     width: 300px;
     height: 300px;
