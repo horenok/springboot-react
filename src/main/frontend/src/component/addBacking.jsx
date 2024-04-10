@@ -64,7 +64,7 @@ function BackingList() {
                 />
                 <label>후원 설명</label>
                 <textarea type='text' value={BackingExplanation} onChange={onBackingExplanationHandler}
-                       style={{/*width: '300px', height: '30px', */fontSize: '16px', marginBottom: '5px'}}
+                       style={{fontSize: '16px', marginBottom: '5px'}}
                 />
                 <input type="file" accept="image/*" onChange={onFileChangeHandler}
                        style={{width: '300px', height: '30px', fontSize: '16px', marginTop: '10px'}}/>

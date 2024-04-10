@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
-//@ComponentScan(basePackages = {"com.kt.aicc.ktbot"})
 @EntityScan({"com.ok.demo.entity"})
-//@EnableJpaRepositories("com.kt.aicc.ktbot")
 @EnableJpaAuditing
 public class JpaConfig {}

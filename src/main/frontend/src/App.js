@@ -24,8 +24,6 @@ function App() {
                 <Route path="/addBacking" element={<AddBacking/>}/>
                 <Route path="/userBackingInfo" element={<UserBackingInfo/>}/>
             </Routes>
-            {/*<UserBackingInfo/>*/}
-            {/*{<pre>{JSON.stringify(allState, null, 2)}</pre>};*/}
         </BrowserRouter>
     );
 }
