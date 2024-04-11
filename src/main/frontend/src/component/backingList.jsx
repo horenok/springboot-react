@@ -65,7 +65,7 @@ function BackingList() {
                     <Button variant="dark" style={{margin: '30px'}} onClick={addNewPost}> 후원글 추가 </Button>
                 </div>
                 <div className="post-container">
-                    {posts.map((post, index) => (
+                    {posts?.map((post, index) => (
                         <div key={index}>
                             <div>
                                 <h2>{post.backingName}</h2>
