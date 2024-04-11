@@ -15,63 +15,39 @@ import static com.ok.demo.constants.SchemaConstants.TABLE_PREFIX;
 public class Backing extends AuditableEntity {
     private static final long serialVersionUID = 76128921921475252L;
 
-    //후원명
-    @Column(length = 300, unique = true, nullable = false)
-    private String backingName;
+    //후원금액
+    @Column(name = "AMOUNT")
+    private Long amount;
 
-    //총 후원금액
-    @Column(name = "ALL_AMOUNT")
-    private Long allAmount = 0L;
+    @ManyToOne
+    @JoinColumn(name = "USER_ID", nullable = false, foreignKey = @ForeignKey(name = "FK_USER_ID"))
+    private User User;
 
-    //후원설명
-    @Column(name = "BACKING_EXPLANATION", length = 500)
-    private String backingExplanation;
+    @ManyToOne
+    @JoinColumn(name = "BACKING_LIST_ID", nullable = false, foreignKey = @ForeignKey(name = "FK_BACKING_LIST_ID"))
+    private BackingList BackingList;
 
-    //이미지파일 이름
-    @Column(name = "IMAGE_NAME", length = 150)
-    private String imageName;
-
-    //이미지파일 경로
-    @Column(name = "IMAGE_PATH", length = 300)
-    private String imagePath;
-
-    public String getBackingName() {
-        return backingName;
+    public Long getAmount() {
+        return amount;
     }
 
-    public void setBackingName(String backingName) {
-        this.backingName = backingName;
+    public void setAmount(Long amount) {
+        this.amount = amount;
     }
 
-    public Long getAllAmount() {
-        return allAmount;
+    public com.ok.demo.entity.User getUser() {
+        return User;
     }
 
-    public void setAllAmount(Long allAmount) {
-        this.allAmount = allAmount;
+    public void setUser(com.ok.demo.entity.User user) {
+        User = user;
     }
 
-    public String getBackingExplanation() {
-        return backingExplanation;
+    public com.ok.demo.entity.BackingList getBackingList() {
+        return BackingList;
     }
 
-    public void setBackingExplanation(String backingExplanation) {
-        this.backingExplanation = backingExplanation;
-    }
-
-    public String getImageName() {
-        return imageName;
-    }
-
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setBackingList(com.ok.demo.entity.BackingList backingList) {
+        BackingList = backingList;
     }
 }

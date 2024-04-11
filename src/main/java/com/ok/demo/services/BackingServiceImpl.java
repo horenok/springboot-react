@@ -1,7 +1,9 @@
 package com.ok.demo.services;
 
-import com.ok.demo.dto.BackingInfo;
+import com.ok.demo.dto.User;
+import com.ok.demo.entity.BackingList;
 import com.ok.demo.entity.Backing;
+import com.ok.demo.repository.BackingListRepository;
 import com.ok.demo.repository.BackingRepository;
 import com.ok.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,34 +18,37 @@ import java.util.List;
 @Service
 public class BackingServiceImpl implements BackingService {
     private final UserRepository userRepository;
+    private final BackingListRepository backingListRepository;
     private final BackingRepository backingRepository;
 
     @Value("${upload.path}")
     private String uploadPath;
 
     @Autowired
-    public BackingServiceImpl(UserRepository userRepository, BackingRepository backingRepository) {
+    public BackingServiceImpl(UserRepository userRepository, BackingListRepository backingListRepository, BackingRepository backingRepository) {
         this.userRepository = userRepository;
+        this.backingListRepository = backingListRepository;
         this.backingRepository = backingRepository;
     }
 
     @Override
-    public List<com.ok.demo.dto.Backing> findAll() {
+    public List<com.ok.demo.dto.BackingList> findAll() {
 
-        List<Backing> entitybl = backingRepository.findAll();
+        List<BackingList> entitybl = backingListRepository.findAll();
         if(ObjectUtils.isEmpty(entitybl)) {
             return null;
         }
 
-        List<com.ok.demo.dto.Backing> bl = new ArrayList<>();
+        List<com.ok.demo.dto.BackingList> bl = new ArrayList<>();
 
-        for (Backing data : entitybl) {
-            com.ok.demo.dto.Backing backing = new com.ok.demo.dto.Backing();
+        for (BackingList data : entitybl) {
+            com.ok.demo.dto.BackingList backing = new com.ok.demo.dto.BackingList();
             backing.setBackingName(data.getBackingName());
             backing.setBackingExplanation(data.getBackingExplanation());
             backing.setAllAmount(data.getAllAmount());
             backing.setImageName(data.getImageName());
             backing.setImagePath(data.getImagePath());
+            backing.setId(data.getId());
 
             bl.add(backing);
         }
@@ -53,15 +58,27 @@ public class BackingServiceImpl implements BackingService {
 
     @Override
     public boolean addNewBacking(MultipartFile file, String backingName, String backingExplanation) {
-        Backing backing = new Backing();
-        backing.setBackingName(backingName);
-        backing.setBackingExplanation(backingExplanation);
-        backing.setImagePath(uploadPath + "/" + file.getOriginalFilename());
-        backing.setImageName(file.getOriginalFilename());
+        BackingList backingList = new BackingList();
+        backingList.setBackingName(backingName);
+        backingList.setBackingExplanation(backingExplanation);
+        backingList.setImagePath(uploadPath + "/" + file.getOriginalFilename());
+        backingList.setImageName(file.getOriginalFilename());
 
-        backingRepository.save(backing);
+        backingListRepository.save(backingList);
 
         return true;
+    }
+    
+    @Override
+    public void save(User user, Long amount) {
+        Backing backing = new Backing();
+        com.ok.demo.entity.User entityUser = new com.ok.demo.entity.User();
+        entityUser.setId(user.getId());
+
+        backing.setUser(entityUser);
+        backing.setAmount(amount);
+
+        backingRepository.save(backing);
     }
 
 }

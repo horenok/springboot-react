@@ -8,7 +8,7 @@ public class User implements Serializable {
     private String email;
     private String password;
     private String name;
-    private Long allAmount;
+    private Long allAmount = 0L;
 
     public Long getId() {
         return id;

@@ -18,9 +18,9 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
                 .maxAge(3600);
     }
 
-    @Override
+    /*@Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/api/backing/images/**")
-                .addResourceLocations("file:/Users/OK/Documents/springboot-react/src/main/resources/static/");
-    }
+                .addResourceLocations("file:/Users/OK/Documents/springboot-react/src/main/resources/static/images/");
+    }*/
 }

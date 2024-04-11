@@ -42,7 +42,7 @@ public class User extends AuditableEntity {
 
     //총 후원금액
     @Column(name = "ALL_AMOUNT")
-    private Long allAmount;
+    private Long allAmount = 0L;
 
     public String getEmail() {
         return email;
