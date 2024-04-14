@@ -68,7 +68,7 @@ public class BackingController {
     @PostMapping("/backing")
     public ResultEntity<ApiResult> backing(@RequestParam Long userId, @RequestParam Long backingAmount) {
         User user = userService.findUser(userId);
-        backingService.save(user, backingAmount);
+        backingService.backing(user, backingAmount);
         return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage());
     }
 

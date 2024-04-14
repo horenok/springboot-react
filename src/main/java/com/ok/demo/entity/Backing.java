@@ -24,7 +24,7 @@ public class Backing extends AuditableEntity {
     private User User;
 
     @ManyToOne
-    @JoinColumn(name = "BACKING_LIST_ID", nullable = false, foreignKey = @ForeignKey(name = "FK_BACKING_LIST_ID"))
+    @JoinColumn(name = "BACKING_LIST_ID", foreignKey = @ForeignKey(name = "FK_BACKING_LIST_ID"))
     private BackingList BackingList;
 
     public Long getAmount() {
