@@ -13,7 +13,7 @@ import static com.ok.demo.constants.SchemaConstants.TABLE_PREFIX;
 @Table(name = TABLE_PREFIX + "BACKING")
 @Where(clause = " IS_DEL='N'")
 public class Backing extends AuditableEntity {
-    private static final long serialVersionUID = 76128921921475252L;
+    private static final long serialVersionUID = 76138921971575952L;
 
     //후원금액
     @Column(name = "AMOUNT")

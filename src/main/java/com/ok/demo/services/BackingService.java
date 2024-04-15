@@ -12,5 +12,5 @@ public interface BackingService {
 
     boolean addNewBacking(MultipartFile file, String backingName, String backingExplanation);
 
-    void backing(User user, Long amount);
+    void backing(User user, Long backingListId, Long amount);
 }

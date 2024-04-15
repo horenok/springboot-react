@@ -33,6 +33,12 @@ public class LoginPageController {
         return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage(), dtouser);
     }
 
+    @GetMapping("/userbackinginfo")
+    public ResultEntity<Long> userBackingInfo(@RequestParam Long id) {
+        User dtouser = userService.findUser(id);
+        return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage(), dtouser.getAllAmount());
+    }
+
     @PostMapping("/emailDuplicate")
     public ResultEntity<ApiResult> emailDuplicate(@RequestBody String email) {
         email = email.replaceAll("^\"|\"$", "");

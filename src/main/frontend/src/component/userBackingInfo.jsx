@@ -20,7 +20,14 @@ function BackingList() {
         const fetchData = async () => {
             try {
                 // 서버로부터 데이터를 가져옵니다.
-                const response = await axios.get('/api/backing/userbackinginfo');
+                const response = await axios.get('/api/users/userbackinginfo', {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                    params: {
+                        id: allState.loginSuccess.data.data.id,
+                    }
+                });
                 // 상태를 업데이트합니다.
                 setBackingInfo(response.data.data);
             } catch (error) {
@@ -41,7 +48,7 @@ function BackingList() {
                         <label>{allState.loginSuccess.data.data.name} 님</label>
                         <label>현재까지 후원해주신 금액</label>
                         <br/>
-                        <h3>{allState.loginSuccess.data.data?.allAmount} 원</h3>
+                        <h3>{backingInfo} 원</h3>
                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '10px'}}>
                             <Button variant="dark" style={{margin: '5px', marginLeft: 'auto'}} onClick={moveBacking}>후원하러가기</Button>
                         </div>

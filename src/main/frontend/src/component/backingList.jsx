@@ -15,9 +15,9 @@ function BackingList() {
     const allState = useSelector(state => state);
     const [posts, setPosts] = useState([]);
     const [backingAmount, setBackingAmount] = useState("");
-    const [show, setShow] = useState({tf: false, name: ""});
-    const handleClose = () => setShow({tf: false, name: ""});
-    const handleShow = (index) => setShow({tf: true, name: posts[index].backingName});
+    const [show, setShow] = useState({tf: false, name: "", backingListId: 0});
+    const handleClose = () => setShow({tf: false, name: "", backingListId: 0});
+    const handleShow = (index) => setShow({tf: true, name: posts[index].backingName, backingListId: posts[index].id});
     const onAmountHandler = (event) => {
         setBackingAmount(event.currentTarget.value);
     }
@@ -44,7 +44,8 @@ function BackingList() {
         event.preventDefault();
         let body = {
             userId: allState.loginSuccess.data.data.id,
-            backingAmount: backingAmount
+            backingAmount: backingAmount,
+            backingListId: show.backingListId,
         }
         axios.post('/api/backing/backing', body, {
             headers: {
@@ -54,6 +55,7 @@ function BackingList() {
         then((res) =>{
             if(res.data.code === '0000') {
                 alert("backingSuccess");
+                handleClose();
             }
         })
     };
@@ -101,7 +103,7 @@ function BackingList() {
                         </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" type='submit' onClick={handleClose}>
+                    <Button variant="primary" type='submit'>
                         후원하기
                     </Button>
                 </Modal.Footer>

@@ -18,7 +18,7 @@ import static com.ok.demo.constants.SchemaConstants.TABLE_PREFIX;
 @Table(name = TABLE_PREFIX + "USER")
 @Where(clause = " IS_DEL='N'")
 public class User extends AuditableEntity {
-    private static final long serialVersionUID = 76128921921475252L;
+    private static final long serialVersionUID = 16127921971173251L;
 
     //이메일
     @Column(length = 100, unique = true, nullable = false)
