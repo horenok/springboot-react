@@ -27,8 +27,8 @@ function HomeNav() {
                         <LinkContainer to="/backingList">
                             <Nav.Link>BackingList</Nav.Link>
                         </LinkContainer>
-                        <LinkContainer to="/bar2">
-                            <Nav.Link>bar2</Nav.Link>
+                        <LinkContainer to="/myPage">
+                            <Nav.Link>MyPage</Nav.Link>
                         </LinkContainer>
                         <LinkContainer to="/bar3">
                             <Nav.Link>bar3</Nav.Link>

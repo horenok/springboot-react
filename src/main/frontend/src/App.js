@@ -9,6 +9,7 @@ import HomeNav from "./pages/HomeNav";
 import {useSelector} from "react-redux";
 import AddBacking from "./component/addBacking";
 import UserBackingInfo from "./component/userBackingInfo";
+import MyPage from "./component/MyPage";
 
 function App() {
     const allState = useSelector(state => state);
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/signup" element={<SignUp/>}/>
                 <Route path="/backingList" element={<BackingList/>}/>
+                <Route path="/myPage" element={<MyPage/>}/>
                 <Route path="/addBacking" element={<AddBacking/>}/>
                 <Route path="/userBackingInfo" element={<UserBackingInfo/>}/>
             </Routes>
