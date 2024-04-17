@@ -19,10 +19,12 @@ public class Backing extends AuditableEntity {
     @Column(name = "AMOUNT")
     private Long amount;
 
+    //유저ID
     @ManyToOne
     @JoinColumn(name = "USER_ID", nullable = false, foreignKey = @ForeignKey(name = "FK_USER_ID"))
     private User User;
 
+    //후원리스트ID
     @ManyToOne
     @JoinColumn(name = "BACKING_LIST_ID", foreignKey = @ForeignKey(name = "FK_BACKING_LIST_ID"))
     private BackingList BackingList;

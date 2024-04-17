@@ -12,11 +12,11 @@ function MyPage() {
     const movePage = useNavigate();
     const allState = useSelector(state => state);
 
-    const [posts, setPosts] = useState([]);
+    const [backingList, setBackingList] = useState([]);
     const [backingAmount, setBackingAmount] = useState("");
     const [show, setShow] = useState({tf: false, name: "", backingListId: 0});
     const handleClose = () => setShow({tf: false, name: "", backingListId: 0});
-    const handleShow = (index) => setShow({tf: true, name: posts[index].backingName, backingListId: posts[index].id});
+    const handleShow = () => setShow({tf: true, name: "", backingListId: 0});
     const onAmountHandler = (event) => {
         setBackingAmount(event.currentTarget.value);
     }
@@ -25,19 +25,24 @@ function MyPage() {
         const fetchData = async () => {
             try {
                 // 서버로부터 데이터를 가져옵니다.
-                const response = await axios.get('/api/backing/getlist');
+                const response = await axios.get('/api/backing/mybacking', {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                    params: {
+                        id: allState.loginSuccess.data.data.id,
+                    }
+                });
                 // 상태를 업데이트합니다.
-                setPosts(response.data.data);
+                setBackingList(response.data.data);
             } catch (error) {
                 console.error('데이터를 가져오는데 실패했습니다.', error);
             }
         };
-        fetchData();
+        if(allState.loginSuccess?.data.code === '0000' && allState.isLoggedIn === true) {
+            fetchData();
+        }
     }, []);
-
-    const addNewPost = () => {
-        movePage('/addBacking');
-    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -65,18 +70,18 @@ function MyPage() {
                 <div className= "title">
                     <h2>내 후원내용</h2>
                 </div>
-                {/*<ListGroup key="sm" horizontal="sm" className="my-2">
-                    <ListGroup.Item style={{width: "auto"}}>후원명</ListGroup.Item>
-                    <ListGroup.Item style={{width: "30%"}}>후원설명</ListGroup.Item>
-                    <ListGroup.Item style={{width: "auto"}}>후원금액</ListGroup.Item>
-                </ListGroup>*/}
+                <ListGroup key="sm" horizontal="sm" className="my-2">
+                    <ListGroup.Item style={{width: "20%", marginTop: "30px"}}>후원명</ListGroup.Item>
+                    <ListGroup.Item style={{width: "50%", marginTop: "30px"}}>후원설명</ListGroup.Item>
+                    <ListGroup.Item style={{width: "15%", marginTop: "30px"}}>후원금액</ListGroup.Item>
+                </ListGroup>
                 <div>
-                    {['1', '2', '3'].map((number) => (
+                    {backingList.map((backing) => (
                         <ListGroup key="sm" horizontal="sm" className="my-2">
-                            <ListGroup.Item style={{width: "20%"}}>후원명{number}</ListGroup.Item>
-                            <ListGroup.Item style={{width: "50%"}}>후원설명{number}</ListGroup.Item>
-                            <ListGroup.Item style={{width: "15%"}}>후원금액{number}</ListGroup.Item>
-                            <Button style={{marginLeft: '30px'}}> 상세 보기 </Button>
+                            <ListGroup.Item style={{width: "20%", marginTop: "30px"}}>{backing.backingList.backingName}</ListGroup.Item>
+                            <ListGroup.Item style={{width: "50%", marginTop: "30px"}}>{backing.backingList.backingExplanation}</ListGroup.Item>
+                            <ListGroup.Item style={{width: "15%", marginTop: "30px"}}>{backing.amount}</ListGroup.Item>
+                            <Button style={{marginLeft: '30px', marginTop: "30px"}}> 상세 보기 </Button>
                         </ListGroup>))}
                 </div>
             </div>

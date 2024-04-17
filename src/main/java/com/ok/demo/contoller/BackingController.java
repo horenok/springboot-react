@@ -1,6 +1,7 @@
 package com.ok.demo.contoller;
 
 import com.ok.demo.common.ResultEntity;
+import com.ok.demo.dto.Backing;
 import com.ok.demo.dto.BackingList;
 import com.ok.demo.dto.User;
 import com.ok.demo.services.BackingService;
@@ -70,6 +71,14 @@ public class BackingController {
         User user = userService.findUser(userId);
         backingService.backing(user, backingListId, backingAmount);
         return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage());
+    }
+
+    @GetMapping("/mybacking")
+    public ResultEntity<List<Backing>> myBacking(@RequestParam Long id) {
+
+        List<Backing> myBackingList = backingService.myBacking(id);
+
+        return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage(), myBackingList);
     }
 
 }

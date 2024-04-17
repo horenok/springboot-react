@@ -87,4 +87,38 @@ public class BackingServiceImpl implements BackingService {
         userRepository.addAmount(user.getId(), allAmount);
     }
 
+    @Override
+    public List<com.ok.demo.dto.Backing> myBacking(Long id) {
+
+        List<com.ok.demo.dto.Backing> myBackingDto = new ArrayList<>();
+        List<Backing> myBackingEntity = backingRepository.myBacking(id);
+
+        for (Backing b : myBackingEntity) {
+            com.ok.demo.dto.Backing bdto = new com.ok.demo.dto.Backing();
+
+            //entity -> dto(user, backingList)
+            User user = new User();
+            com.ok.demo.dto.BackingList backingList = new com.ok.demo.dto.BackingList();
+
+            user.setId(b.getUser().getId());
+            user.setAllAmount(b.getUser().getAllAmount());
+            user.setName(b.getUser().getName());
+            user.setEmail(b.getUser().getEmail());
+            user.setPassword(b.getUser().getPassword());
+            backingList.setId(b.getBackingList().getId());
+            backingList.setBackingName(b.getBackingList().getBackingName());
+            backingList.setBackingExplanation(b.getBackingList().getBackingExplanation());
+            backingList.setImageName(b.getBackingList().getImageName());
+            backingList.setImagePath(b.getBackingList().getImagePath());
+            backingList.setAllAmount(b.getBackingList().getAllAmount());
+            bdto.setAmount(b.getAmount());
+            bdto.setUser(user);
+            bdto.setBackingList(backingList);
+
+            myBackingDto.add(bdto);
+        }
+
+        return myBackingDto;
+    }
+
 }
