@@ -7,6 +7,7 @@ import "../css/myPage.css"
 import axios, {all} from "axios";
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
+import Container from "react-bootstrap/Container";
 
 function MyPage() {
     const movePage = useNavigate();
@@ -15,8 +16,11 @@ function MyPage() {
     const [backingList, setBackingList] = useState([]);
     const [backingAmount, setBackingAmount] = useState("");
     const [show, setShow] = useState({tf: false, name: "", backingListId: 0});
-    const handleClose = () => setShow({tf: false, name: "", backingListId: 0});
-    const handleShow = () => setShow({tf: true, name: "", backingListId: 0});
+    const handleClose = () => setShow({tf: false});
+    const handleShow = (index) => setShow({tf: true,
+                                                        backingName: backingList[index].backingList.backingName,
+                                                        backingExplanation: backingList[index].backingList.backingExplanation,
+                                                        amount: backingList[index].amount});
     const onAmountHandler = (event) => {
         setBackingAmount(event.currentTarget.value);
     }
@@ -68,7 +72,7 @@ function MyPage() {
         <>
             <div className= "container">
                 <div className= "title">
-                    <h2>내 후원내용</h2>
+                    <h2>내 후원 내용</h2>
                 </div>
                 <ListGroup key="sm" horizontal="sm" className="my-2">
                     <ListGroup.Item style={{width: "20%", marginTop: "30px"}}>후원명</ListGroup.Item>
@@ -76,17 +80,57 @@ function MyPage() {
                     <ListGroup.Item style={{width: "15%", marginTop: "30px"}}>후원금액</ListGroup.Item>
                 </ListGroup>
                 <div>
-                    {backingList.map((backing) => (
+                    {backingList.map((backing, index) => (
                         <ListGroup key="sm" horizontal="sm" className="my-2">
                             <ListGroup.Item style={{width: "20%", marginTop: "30px"}}>{backing.backingList.backingName}</ListGroup.Item>
                             <ListGroup.Item style={{width: "50%", marginTop: "30px"}}>{backing.backingList.backingExplanation}</ListGroup.Item>
                             <ListGroup.Item style={{width: "15%", marginTop: "30px"}}>{backing.amount}</ListGroup.Item>
-                            <Button style={{marginLeft: '30px', marginTop: "30px"}}> 상세 보기 </Button>
+                            <Button onClick={() => handleShow(index)} style={{marginLeft: '30px', marginTop: "30px"}}> 상세 보기 </Button>
                         </ListGroup>))}
                 </div>
+                {/*<h2>{backingList[0].backingList.backingExplanation.toString()}</h2>*/}
             </div>
 
-            <Modal show={show.tf} onHide={handleClose}
+            <Modal /*{...props}*/ show={show.tf} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
+                <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        상세 후원 내용
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="grid-example">
+                    <Container>
+                        <Row>
+                            <Col md={3}>
+                                후원명 :
+                            </Col>
+                            <Col md={9}>
+                                {show.backingName}
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col md={3}>
+                                후원 설명 :
+                            </Col>
+                            <Col md={9}>
+                                {show.backingExplanation}
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col md={3}>
+                                후원 금액 :
+                            </Col>
+                            <Col md={9}>
+                                {show.amount}
+                            </Col>
+                        </Row>
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={handleClose}>Close</Button>
+                </Modal.Footer>
+            </Modal>
+
+           {/* <Modal show={show.tf} onHide={handleClose}
                    size="xlg"
                    aria-labelledby="contained-modal-title-vcenter"
                    centered>
@@ -114,7 +158,7 @@ function MyPage() {
                         </Button>
                     </Modal.Footer>
                 </Form>
-            </Modal>
+            </Modal>*/}
         </>
     );
 }
