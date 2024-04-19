@@ -7,7 +7,7 @@ import {useSelector} from "react-redux";
 import {LinkContainer} from "react-router-bootstrap";
 import Nav from "react-bootstrap/Nav";
 
-function BackingList() {
+function UserBackingInfo() {
     const allState = useSelector(state => state);
     const [backingInfo, setBackingInfo] = useState([]);
     const movePage = useNavigate();
@@ -39,7 +39,7 @@ function BackingList() {
 
     return (
         <div style={{
-            display: 'flex', width: '20%', height: '30vh', position: 'absolute', right: '0px', margin: '30px', borderStyle: "solid"
+            display: 'flex', width: '20%', height: '30vh', right: '0px', margin: '30px', borderStyle: "solid", marginBottom: "auto"
         }}>
 
             {allState.loginSuccess?.data.code === '0000' && allState.isLoggedIn === true ? (
@@ -63,4 +63,4 @@ function BackingList() {
     );
 }
 
-export default BackingList;
+export default UserBackingInfo;

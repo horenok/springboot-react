@@ -6,8 +6,10 @@ function Home() {
 
     return (
         <>
-            <UserBackingInfo/>
-            <pre>{JSON.stringify(allState, null, 2)}</pre>;
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                <pre>{JSON.stringify(allState, null, 2)}</pre>;
+                <UserBackingInfo/>
+            </div>
         </>
     )
 }
