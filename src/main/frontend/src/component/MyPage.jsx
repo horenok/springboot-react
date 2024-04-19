@@ -21,9 +21,6 @@ function MyPage() {
                                                         backingName: backingList[index].backingList.backingName,
                                                         backingExplanation: backingList[index].backingList.backingExplanation,
                                                         amount: backingList[index].amount});
-    const onAmountHandler = (event) => {
-        setBackingAmount(event.currentTarget.value);
-    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -48,26 +45,6 @@ function MyPage() {
         }
     }, []);
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        let body = {
-            userId: allState.loginSuccess.data.data.id,
-            backingAmount: backingAmount,
-            backingListId: show.backingListId,
-        }
-        axios.post('/api/backing/backing', body, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        }).
-        then((res) =>{
-            if(res.data.code === '0000') {
-                alert("backingSuccess");
-                handleClose();
-            }
-        })
-    };
-
     return (
         <>
             <div className= "container">
@@ -91,7 +68,7 @@ function MyPage() {
                 {/*<h2>{backingList[0].backingList.backingExplanation.toString()}</h2>*/}
             </div>
 
-            <Modal /*{...props}*/ show={show.tf} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
+            <Modal show={show.tf} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
                         상세 후원 내용
@@ -129,36 +106,6 @@ function MyPage() {
                     <Button onClick={handleClose}>Close</Button>
                 </Modal.Footer>
             </Modal>
-
-           {/* <Modal show={show.tf} onHide={handleClose}
-                   size="xlg"
-                   aria-labelledby="contained-modal-title-vcenter"
-                   centered>
-                <Form onSubmit={handleSubmit} >
-                    <Modal.Header closeButton>
-                        <Modal.Title>후원하기</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
-                        <h2 style={{marginBottom: "30px"}}>{show.name}</h2>
-                        <Form.Group
-                            className="mb-3"
-                            controlId="exampleForm.ControlTextarea1"
-                            style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}
-                        >
-                            <Form.Label>후원할 금액</Form.Label>
-                            <div style={{display: "flex"}}>
-                                <Form.Control onChange={onAmountHandler} type="text" rows={3} style={{ width: "80%"}}/>
-                                <h5 style={{marginLeft: "auto"}}>원</h5>
-                            </div>
-                        </Form.Group>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="primary" type='submit'>
-                            후원하기
-                        </Button>
-                    </Modal.Footer>
-                </Form>
-            </Modal>*/}
         </>
     );
 }

@@ -18,6 +18,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
                 .maxAge(3600);
     }
 
+    // localhost:8080/api/backing/images/** 로 호출 시 /Users/OK/Documents/springboot-react/src/main/resources/static/images/경로 아래 파일 탐색
     /*@Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/api/backing/images/**")
