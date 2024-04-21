@@ -1,6 +1,6 @@
 .main_bg{
     height: 400px;
-    background-image: url('../images/후원이미지.png');
+    /*background-image: url('../images/후원이미지.png');*/
     background-size: cover;
     background-position: center;
     background-color: #000000;
