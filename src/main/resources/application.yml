@@ -19,6 +19,9 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: update
+  redis:
+    host: localhost
+    port: 6379
 
 upload:
   path: /Users/OK/Documents/springboot-react/src/main/resources/static/images
