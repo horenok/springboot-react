@@ -22,6 +22,8 @@ spring:
   redis:
     host: localhost
     port: 6379
+  session:
+    store-type: redis
 
 upload:
   path: /Users/OK/Documents/springboot-react/src/main/resources/static/images
