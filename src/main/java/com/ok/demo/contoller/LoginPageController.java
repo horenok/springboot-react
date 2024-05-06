@@ -8,6 +8,8 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 @RestController
 @RequestMapping("/api/users")
 public class LoginPageController {
@@ -19,7 +21,7 @@ public class LoginPageController {
     }
 
     @PostMapping("/login")
-    public ResultEntity<User> login(@RequestBody User user) {
+    public ResultEntity<User> login(HttpSession session, @RequestBody User user) {
         if(StringUtils.isEmpty(user.getEmail()) || StringUtils.isEmpty(user.getPassword())) {
             return new ResultEntity<>(ApiResult.FAIL.getCode(), ApiResult.FAIL.getMessage());
         }
@@ -30,6 +32,7 @@ public class LoginPageController {
             return new ResultEntity<>(ApiResult.FAIL.getCode(), ApiResult.FAIL.getMessage());
         }
 
+        session.setAttribute("testsession", dtouser.getName());
         return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage(), dtouser);
     }
 
