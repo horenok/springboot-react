@@ -1,10 +1,8 @@
 package com.ok.demo.common;
 
 import com.ok.demo.type.user.ApiResult;
-import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;
-import java.util.Map;
 
 
 /**
@@ -25,71 +23,13 @@ public class ResultEntity<T> implements Serializable{
         this.message = message;
     }
 
-    public ResultEntity(T data) {
-        this.data = data;
-    }
-
     public ResultEntity(String code, String message, final T data) {
         this(code, message);
         this.data = data;
     }
 
-    public static ResultEntity create(){
-        return new ResultEntity();
-    }
-
-    public static ResultEntity of(String code, String message){
-        return new ResultEntity(code, message);
-    }
-
-    public static ResultEntity of(ApiResult apiResult){
-        return create().apiResult(apiResult);
-    }
-
-    public static ResultEntity ok(){
-        return new ResultEntity(HttpStatus.OK);
-    }
-
-    public static ResultEntity ok(Object data){
-        return new ResultEntity(data);
-    }
-
-    public static ResultEntity badRequest(){
-        return new ResultEntity().setCode(ApiResult.CODE_BAD_REQUEST);
-    }
-
-    public ResultEntity apiResult(ApiResult apiResult){
-        this.code = apiResult.getCode();
-        this.message = apiResult.getMessage();
-        return this;
-    }
-
     public ResultEntity data(T data){
         this.data = data;
-        return this;
-    }
-
-    public static ResultEntity fail(Map<String, Object> data){
-        return new ResultEntity()
-                .setCode(ApiResult.FAIL.getCode())
-                .setData(data);
-    }
-
-    public ResultEntity fail(String message){
-        this.code = ApiResult.FAIL.getCode();
-        this.message = message;
-        return this;
-    }
-
-    public ResultEntity invalid(String message){
-        this.code = ApiResult.CODE_INVALID;
-        this.message = message;
-        return this;
-    }
-
-    public ResultEntity notFound(String message){
-        this.code = ApiResult.CODE_NOT_FOUND;
-        this.message = message;
         return this;
     }
 
