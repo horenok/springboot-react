@@ -70,4 +70,7 @@ public class RedisServiceImpl implements RedisService {
     public Set<String> keys(String keyPattern) {
         return redisTemplate.keys(keyPattern);
     }
+
+    @Override
+    public Long getTTL(String key) { return redisTemplate.getExpire("BACKINGSESSION:sessions:expires:" + key); }
 }

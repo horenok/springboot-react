@@ -17,4 +17,6 @@ public interface RedisService {
     void putExpired(String key, List list, long timeout, TimeUnit unit);
     boolean hasKey(String key);
     Set<String> keys(String keyPattern);
+
+    Long getTTL(String key);
 }

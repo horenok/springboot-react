@@ -2,8 +2,10 @@ package com.ok.demo.contoller;
 
 import com.ok.demo.common.ResultEntity;
 import com.ok.demo.dto.User;
+import com.ok.demo.services.RedisService;
 import com.ok.demo.services.UserService;
 import com.ok.demo.type.user.ApiResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +17,11 @@ import javax.servlet.http.HttpSession;
 public class LoginPageController {
 
     private final UserService userService;
+    private final RedisService redisService;
 
-    public LoginPageController(UserService userService) {
+    public LoginPageController(UserService userService, RedisService redisService) {
         this.userService = userService;
+        this.redisService = redisService;
     }
 
     @PostMapping("/login")
@@ -32,8 +36,12 @@ public class LoginPageController {
             return new ResultEntity<>(ApiResult.FAIL.getCode(), ApiResult.FAIL.getMessage());
         }
 
-        session.setAttribute("testsession", dtouser.getName());
         return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage(), dtouser);
+    }
+
+    @GetMapping("/getTTL")
+    public ResultEntity<Long> getTTL(HttpSession session) {
+        return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage(), redisService.getTTL(session.getId()));
     }
 
     @GetMapping("/userbackinginfo")
