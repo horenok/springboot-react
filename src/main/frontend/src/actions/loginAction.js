@@ -11,8 +11,10 @@ export function loginAction(dataToSubmit) {
 }
 
 export function logoutAction() {
+    const request = axios
+        .post('/api/users/logout');
     return {
         type: LOGOUT,
-        payload: true,
+        payload: request,
     };
 }

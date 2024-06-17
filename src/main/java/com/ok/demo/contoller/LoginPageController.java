@@ -76,5 +76,11 @@ public class LoginPageController {
 
         return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage());
     }
+//    @PostMapping("/logout")
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public ResultEntity<ApiResult> logout(HttpSession session) {
+        session.invalidate();
+        return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage());
+    }
 
 }

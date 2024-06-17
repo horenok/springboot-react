@@ -9,7 +9,7 @@ import org.springframework.session.web.http.DefaultCookieSerializer;
 import org.springframework.session.web.http.HttpSessionIdResolver;
 
 @Configuration
-@EnableRedisHttpSession(redisNamespace = "BACKINGSESSION", maxInactiveIntervalInSeconds = 3600)
+@EnableRedisHttpSession(redisNamespace = "BACKINGSESSION", maxInactiveIntervalInSeconds = 60)
 public class RedisSessionConfig {
 
     @Bean
