@@ -7,12 +7,14 @@ import { LinkContainer } from "react-router-bootstrap";
 import {connect, useDispatch, useSelector} from "react-redux";
 import {logoutAction} from "../actions/loginAction";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 function HomeNav() {
     const allState = useSelector((state) => state);
 
     const [ttl, setTTL] = useState(null);
     const intervalIdRef = useRef(null);
+    const movePage = useNavigate();
 
     const dispatch = useDispatch();
     const Logout = async (event) => {
@@ -21,6 +23,7 @@ function HomeNav() {
         await dispatch(logoutAction()).then((res) => {
             if (res.payload.data.code == '0000') {
                 alert("LogoutSuccess");
+                movePage('/login');
             } else {
                 alert("LogoutFail");
             }

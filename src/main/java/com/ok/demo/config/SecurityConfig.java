@@ -14,6 +14,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable(); //csrf공격방지 해제 (403 에러 방지)
 
+        http.cors();
+
         http.sessionManagement()
                 .maximumSessions(1)
                 .maxSessionsPreventsLogin(false)
@@ -24,9 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();
 
         // logout
-        http.logout()
+         http.logout()
                 .logoutUrl("/api/users/logout")
                 .deleteCookies("BACKINGSESSIONID")
-                .logoutSuccessUrl("http://localhost:3000/login");//로컬 환경일때만 적용
+                .logoutSuccessUrl("/post-logout");//로컬 환경일때만 적용
     }
 }
