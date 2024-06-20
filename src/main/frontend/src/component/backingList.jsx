@@ -37,7 +37,8 @@ function BackingList() {
     }, []);
 
     const addNewPost = () => {
-        movePage('/addBacking');
+        {allState.loginSuccess?.data?.code === '0000' && allState.isLoggedIn === true ? (
+        movePage('/addBacking')) : (alert("로그인을 해주세요"))}
     }
 
     const handleSubmit = (event) => {
@@ -88,25 +89,35 @@ function BackingList() {
                 <Modal.Header closeButton>
                     <Modal.Title>후원하기</Modal.Title>
                 </Modal.Header>
+                {allState.loginSuccess?.data?.code === '0000' && allState.isLoggedIn === true ? (
                 <Modal.Body style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
                     <h2 style={{marginBottom: "30px"}}>{show.name}</h2>
                         <Form.Group
                             className="mb-3"
                             controlId="exampleForm.ControlTextarea1"
-                            style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}
-                        >
+                            style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
                             <Form.Label>후원할 금액</Form.Label>
                             <div style={{display: "flex"}}>
                                 <Form.Control onChange={onAmountHandler} type="text" rows={3} style={{ width: "80%"}}/>
                                 <h5 style={{marginLeft: "auto"}}>원</h5>
                             </div>
                         </Form.Group>
-                </Modal.Body>
+                </Modal.Body>) : (
+                    <Modal.Body style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
+                        <h2>로그인을 해주세요</h2>
+                    </Modal.Body>
+                )}
+                {allState.loginSuccess?.data?.code === '0000' && allState.isLoggedIn === true ? (
                 <Modal.Footer>
                     <Button variant="primary" type='submit'>
                         후원하기
                     </Button>
-                </Modal.Footer>
+                </Modal.Footer>) : (
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleClose}>
+                        돌아가기
+                    </Button>
+                </Modal.Footer>)}
                 </Form>
             </Modal>
         </>
