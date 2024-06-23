@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,6 +94,8 @@ public class BackingServiceImpl implements BackingService {
 
         for (Backing b : myBackingEntity) {
             com.ok.demo.dto.Backing bdto = new com.ok.demo.dto.Backing();
+            LocalDateTime time =  b.getCreatedAt();
+            time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
             //entity -> dto(user, backingList)
             User user = new User();
@@ -108,6 +112,7 @@ public class BackingServiceImpl implements BackingService {
             backingList.setImageName(b.getBackingList().getImageName());
             backingList.setImagePath(b.getBackingList().getImagePath());
             backingList.setAllAmount(b.getBackingList().getAllAmount());
+            bdto.setTime(time);
             bdto.setAmount(b.getAmount());
             bdto.setUser(user);
             bdto.setBackingList(backingList);

@@ -16,12 +16,13 @@ function MyPage() {
 
     const [backingList, setBackingList] = useState([]);
     const [backingAmount, setBackingAmount] = useState("");
-    const [show, setShow] = useState({tf: false, name: "", backingListId: 0});
+    const [show, setShow] = useState({tf: false, name: "", backingListId: 0, time: ""});
     const handleClose = () => setShow({tf: false});
     const handleShow = (index) => setShow({tf: true,
                                                         backingName: backingList[index].backingList.backingName,
                                                         backingExplanation: backingList[index].backingList.backingExplanation,
-                                                        amount: backingList[index].amount});
+                                                        amount: backingList[index].amount,
+                                                        time: backingList[index].time[0] + "-" + backingList[index].time[1] + "-" + backingList[index].time[2] + " " + backingList[index].time[3] + ":" + backingList[index].time[4] + ":" + backingList[index].time[5]});
 
     useEffect(() => {
         const fetchData = async () => {
@@ -55,15 +56,17 @@ function MyPage() {
                     </div>
                     <ListGroup key="sm" horizontal="sm" className="my-2">
                         <ListGroup.Item style={{width: "20%", marginTop: "30px"}}>후원명</ListGroup.Item>
-                        <ListGroup.Item style={{width: "50%", marginTop: "30px"}}>후원설명</ListGroup.Item>
-                        <ListGroup.Item style={{width: "15%", marginTop: "30px"}}>후원금액</ListGroup.Item>
+                        <ListGroup.Item style={{width: "20%", marginTop: "30px"}}>후원설명</ListGroup.Item>
+                        <ListGroup.Item style={{width: "10%", marginTop: "30px"}}>후원금액</ListGroup.Item>
+                        <ListGroup.Item style={{width: "20%", marginTop: "30px"}}>후원일시</ListGroup.Item>
                     </ListGroup>
                     <div>
                         {backingList.map((backing, index) => (
                             <ListGroup key="sm" horizontal="sm" className="my-2">
                                 <ListGroup.Item style={{width: "20%", marginTop: "30px"}}>{backing.backingList.backingName}</ListGroup.Item>
-                                <ListGroup.Item style={{width: "50%", marginTop: "30px"}}>{backing.backingList.backingExplanation}</ListGroup.Item>
-                                <ListGroup.Item style={{width: "15%", marginTop: "30px"}}>{backing.amount}</ListGroup.Item>
+                                <ListGroup.Item style={{width: "20%", marginTop: "30px"}}>{backing.backingList.backingExplanation}</ListGroup.Item>
+                                <ListGroup.Item style={{width: "10%", marginTop: "30px"}}>{backing.amount}</ListGroup.Item>
+                                <ListGroup.Item style={{width: "20%", marginTop: "30px"}}>{backing.time[0]}-{backing.time[1]}-{backing.time[2]} {backing.time[3]}:{backing.time[4]}:{backing.time[5]}</ListGroup.Item>
                                 <Button onClick={() => handleShow(index)} style={{marginLeft: '30px', marginTop: "30px"}}> 상세 보기 </Button>
                             </ListGroup>))}
                     </div>
@@ -101,6 +104,14 @@ function MyPage() {
                             </Col>
                             <Col md={9}>
                                 {show.amount}
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col md={3}>
+                                후원 일시 :
+                            </Col>
+                            <Col md={9}>
+                                {show.time}
                             </Col>
                         </Row>
                     </Container>
