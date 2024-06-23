@@ -49,10 +49,10 @@ function PostDetail() {
             <div>
                 <div className="postdetail-container">
                     <div>
-                        {/*<h2>{post.backingName}</h2>*/}
                         <label>{post.backingName}</label>
                         <img src={"/api/backing/image?imagePath=" + post.imagePath} alt={post.imageName}/>
                         <p>{post.backingExplanation}</p>
+                        <p>지금까지 총 후원금액 : {post.allAmount}</p>
                         <Button variant="dark" onClick={() => handleShow()}> 후원하기 </Button>
                     </div>
                 </div>
@@ -62,7 +62,7 @@ function PostDetail() {
                    size="xlg"
                    aria-labelledby="contained-modal-title-vcenter"
                    centered>
-                <Form onSubmit={handleSubmit} >
+                <Form onSubmit={handleSubmit}>
                     <Modal.Header closeButton>
                         <Modal.Title>후원하기</Modal.Title>
                     </Modal.Header>
