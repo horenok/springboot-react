@@ -10,6 +10,7 @@ import {useSelector} from "react-redux";
 import AddBacking from "./component/addBacking";
 import UserBackingInfo from "./component/userBackingInfo";
 import MyPage from "./component/MyPage";
+import PostDetail from "./component/postDetail";
 
 function App() {
     const allState = useSelector(state => state);
@@ -25,6 +26,7 @@ function App() {
                 <Route path="/myPage" element={<MyPage/>}/>
                 <Route path="/addBacking" element={<AddBacking/>}/>
                 <Route path="/userBackingInfo" element={<UserBackingInfo/>}/>
+                <Route path="/post/:id" element={<PostDetail/>}/>
             </Routes>
         </BrowserRouter>
     );

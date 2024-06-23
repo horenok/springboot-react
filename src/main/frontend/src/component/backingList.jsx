@@ -5,12 +5,15 @@ import Form from 'react-bootstrap/Form';
 
 import '../css/BackingList.css';
 import axios, {all} from "axios";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import FormContext from "react-bootstrap/FormContext";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {postAction} from "../actions/postAction";
+import {loginAction} from "../actions/loginAction";
 
 function BackingList() {
     const movePage = useNavigate();
+    const dispatch = useDispatch();
 
     const allState = useSelector(state => state);
     const [posts, setPosts] = useState([]);
@@ -23,18 +26,12 @@ function BackingList() {
     }
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                // 서버로부터 데이터를 가져옵니다.
-                const response = await axios.get('/api/backing/getlist');
-                // 상태를 업데이트합니다.
-                setPosts(response.data.data);
-            } catch (error) {
-                console.error('데이터를 가져오는데 실패했습니다.', error);
+        dispatch(postAction()).then((res) => { //posts redux에 state 저장
+            if (res.payload.data.code == '0000') {
+                setPosts(res.payload.data.data);
             }
-        };
-        fetchData();
-    }, []);
+        });
+    }, []); //두번째 인자인 [] 안넣으면 렌더링될때마다 호출하여 무한호출
 
     const addNewPost = () => {
         {allState.loginSuccess?.data?.code === '0000' && allState.isLoggedIn === true ? (
@@ -71,11 +68,14 @@ function BackingList() {
                     {posts?.map((post, index) => (
                         <div key={index}>
                             <div>
-                                <h2>{post.backingName}</h2>
+                                {/*<h2>{post.backingName}</h2>*/}
+                                <h2>
+                                    <Link to={`/post/${post.id}`}>{post.backingName}</Link>
+                                </h2>
                                 <Button variant="dark" onClick={() => handleShow(index)}> 후원하기 </Button>
                             </div>
                             <p>{post.backingExplanation}</p>
-                            <img src={"/api/backing/image?imagePath=" + post.imagePath} alt={post.imageName} />
+                            <img src={"/api/backing/image?imagePath=" + post.imagePath} alt={post.imageName} style={{margin: '30px'}}/>
                         </div>
                     ))}
                 </div>

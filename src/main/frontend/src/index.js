@@ -8,7 +8,7 @@ import storage from 'redux-persist/lib/storage';
 
 import promiseMiddleware from 'redux-promise';
 import { thunk } from 'redux-thunk';
-import Reducer from './reducers/login';
+import Reducer from './reducers/reducers';
 import App from "./App";
 
 import 'bootstrap/dist/css/bootstrap.min.css';

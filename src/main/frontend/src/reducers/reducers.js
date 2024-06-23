@@ -1,4 +1,4 @@
-import {EMAILDUPLICATE, LOGIN, LOGOUT, SIGNUP} from "../actions/types";
+import {EMAILDUPLICATE, LOGIN, LOGOUT, POSTS, SIGNUP} from "../actions/types";
 
 export default function (state = {}, action) {
 
@@ -18,6 +18,9 @@ export default function (state = {}, action) {
             break;
         case EMAILDUPLICATE:
             return { ...state, emailDuplicate: action.payload };
+            break;
+        case POSTS:
+            return { ...state, post: action.payload };
             break;
         default:
             return {
