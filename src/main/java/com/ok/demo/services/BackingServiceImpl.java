@@ -72,19 +72,16 @@ public class BackingServiceImpl implements BackingService {
     @Override
     public void backing(User user, Long backingListId, Long amount) {
         Backing backing = new Backing();
-        com.ok.demo.entity.User entityUser = new com.ok.demo.entity.User();
-        BackingList backingList = new BackingList();
-
-        entityUser.setId(user.getId());
-        backingList.setId(backingListId);
-        Long allAmount = user.getAllAmount() + amount;
+        com.ok.demo.entity.User entityUser = userRepository.findById(user.getId()).get(); //유저ID를 통해 해당유저정보 찾기
+        BackingList backingList = backingListRepository.findById(backingListId).get(); //후원리스트ID를 통해 해당후원정보 찾기
 
         backing.setUser(entityUser);
         backing.setBackingList(backingList);
         backing.setAmount(amount);
 
         backingRepository.save(backing);
-        userRepository.addAmount(user.getId(), allAmount);
+        backingListRepository.addAmount(backingListId, backingList.getAllAmount() + amount);
+        userRepository.addAmount(user.getId(), user.getAllAmount() + amount);
     }
 
     @Override
