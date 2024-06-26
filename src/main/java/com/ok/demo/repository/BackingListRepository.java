@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public interface BackingListRepository extends JpaRepository<BackingList, Long> {
 
-    @Override
+    @Query("select b from BackingList as b order by b.createdAt desc")
     List<BackingList> findAll();
 
     @Query("select b from BackingList as b where b.id = ?1")
