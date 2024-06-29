@@ -60,6 +60,22 @@ public class BackingServiceImpl implements BackingService {
     }
 
     @Override
+    public com.ok.demo.dto.BackingList findById(Long id) {
+        com.ok.demo.dto.BackingList backingListDto = new com.ok.demo.dto.BackingList();
+
+        BackingList backingListEntity = backingListRepository.findById(id).get();
+
+        backingListDto.setId(backingListEntity.getId());
+        backingListDto.setBackingName(backingListEntity.getBackingName());
+        backingListDto.setAllAmount(backingListEntity.getAllAmount());
+        backingListDto.setBackingExplanation(backingListEntity.getBackingExplanation());
+        backingListDto.setImageName(backingListEntity.getImageName());
+        backingListDto.setImagePath(backingListEntity.getImagePath());
+
+        return backingListDto;
+    }
+
+    @Override
     public boolean addNewBacking(MultipartFile file, String backingName, String backingExplanation) {
         BackingList backingList = new BackingList();
         backingList.setBackingName(backingName);

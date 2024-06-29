@@ -68,7 +68,6 @@ function BackingList() {
                     {posts?.map((post, index) => (
                         <div key={index}>
                             <div>
-                                {/*<h2>{post.backingName}</h2>*/}
                                 <h2>
                                     <Link to={`/post/${post.id}`}>{post.backingName}</Link>
                                 </h2>

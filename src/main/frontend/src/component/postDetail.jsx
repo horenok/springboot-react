@@ -6,42 +6,53 @@ import Form from 'react-bootstrap/Form';
 import '../css/postDetail.css';
 import axios, {all} from "axios";
 import {Link, useLocation, useNavigate, useParams, usepost} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {postAction} from "../actions/postAction";
 
 function PostDetail() {
     const movePage = useNavigate();
     const location = useLocation();
 
     const allState = useSelector(state => state);
+    const dispatch = useDispatch();
     const [backingAmount, setBackingAmount] = useState("");
     const [show, setShow] = useState({tf: false, name: "", backingListId: 0});
     const param = useParams();
-    const post = allState.post.data.data[param.id-1];
+    // const post = allState.post.data.data[param.id-1];
 
+    const [post, setPost] = useState(allState.post.data.data[allState.post.data.data.length-param.id]);
     const handleClose = () => setShow({tf: false, name: "", backingListId: 0});
     const handleShow = () => setShow({tf: true, name: post.backingName, backingListId: post.id});
     const onAmountHandler = (event) => {
         setBackingAmount(event.currentTarget.value);
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         let body = {
             userId: allState.loginSuccess.data.data.id,
             backingAmount: backingAmount,
             backingListId: show.backingListId,
         }
-        axios.post('/api/backing/backing', body, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        }).
-        then((res) =>{
+        try {
+            const res = await axios.post('/api/backing/backing', body, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
             if(res.data.code === '0000') {
                 alert("backingSuccess");
                 handleClose();
+
+                //postDetail 총 후원금액 가져오기 param.id
+                const res2 = await axios.get('/api/backing/getpostdetail?id='+param.id);
+                if(res2.data.code ==='0000') {
+                    setPost(res2.data.data);
+                }
             }
-        })
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (

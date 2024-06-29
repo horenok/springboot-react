@@ -10,6 +10,7 @@ import java.util.List;
 public interface BackingService {
 
     List<BackingList> findAll();
+    BackingList findById(Long id);
 
     boolean addNewBacking(MultipartFile file, String backingName, String backingExplanation);
 

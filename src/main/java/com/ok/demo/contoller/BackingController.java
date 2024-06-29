@@ -41,6 +41,12 @@ public class BackingController {
         return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage(), bl);
     }
 
+    @GetMapping("/getpostdetail")
+    public ResultEntity<BackingList> getPostDetail(@RequestParam Long id) {
+        BackingList bl = backingService.findById(id);
+        return new ResultEntity<>(ApiResult.SUCCESSS.getCode(), ApiResult.SUCCESSS.getMessage(), bl);
+    }
+
     @GetMapping("/image")
     public ResponseEntity<?> returnImage(@RequestParam String imagePath) {
         Resource resource = new FileSystemResource(imagePath);
