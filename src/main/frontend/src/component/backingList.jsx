@@ -10,6 +10,7 @@ import FormContext from "react-bootstrap/FormContext";
 import {useDispatch, useSelector} from "react-redux";
 import {postAction} from "../actions/postAction";
 import {loginAction} from "../actions/loginAction";
+import {Paging} from "./paging";
 
 function BackingList() {
     const movePage = useNavigate();
@@ -24,6 +25,13 @@ function BackingList() {
     const onAmountHandler = (event) => {
         setBackingAmount(event.currentTarget.value);
     }
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage, setPostsPerPage] = useState(3);
+
+    const firstPostIndex = (currentPage - 1) * postsPerPage;
+    const lastPostIndex = firstPostIndex + postsPerPage;
+    const currentPosts = posts.slice(firstPostIndex, lastPostIndex);
 
     useEffect(() => {
         dispatch(postAction()).then((res) => { //posts redux에 state 저장
@@ -65,7 +73,7 @@ function BackingList() {
                     <Button variant="dark" style={{margin: '30px'}} onClick={addNewPost}> 후원글 추가 </Button>
                 </div>
                 <div className="post-container">
-                    {posts?.map((post, index) => (
+                    {currentPosts?.map((post, index) => (
                         <div key={index}>
                             <div>
                                 <h2>
@@ -78,6 +86,12 @@ function BackingList() {
                         </div>
                     ))}
                 </div>
+                <Paging
+                    postsNum = {posts.length}
+                    postsPerPage = {postsPerPage}
+                    setCurrentPage = {setCurrentPage}
+                    currentPage={currentPage}
+                />
             </div>
 
             <Modal show={show.tf} onHide={handleClose}

@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {Button, Col, FormText, Modal, Row} from "react-bootstrap";
 import ListGroup from 'react-bootstrap/ListGroup';
-import Form from 'react-bootstrap/Form';
 
 import "../css/myPage.css"
 import axios, {all} from "axios";
@@ -9,6 +8,7 @@ import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import Container from "react-bootstrap/Container";
 import UserBackingInfo from "./userBackingInfo";
+import {Paging} from "./paging";
 
 function MyPage() {
     const movePage = useNavigate();
@@ -23,6 +23,13 @@ function MyPage() {
                                                         backingExplanation: backingList[index].backingList.backingExplanation,
                                                         amount: backingList[index].amount,
                                                         time: backingList[index].time[0] + "-" + backingList[index].time[1] + "-" + backingList[index].time[2] + " " + backingList[index].time[3] + ":" + backingList[index].time[4] + ":" + backingList[index].time[5]});
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage, setPostsPerPage] = useState(10);
+
+    const firstPostIndex = (currentPage - 1) * postsPerPage;
+    const lastPostIndex = firstPostIndex + postsPerPage;
+    const currentBackingList = backingList.slice(firstPostIndex, lastPostIndex);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -61,7 +68,7 @@ function MyPage() {
                         <ListGroup.Item style={{width: "20%", marginTop: "30px"}}>후원일시</ListGroup.Item>
                     </ListGroup>
                     <div>
-                        {backingList.map((backing, index) => (
+                        {currentBackingList.map((backing, index) => (
                             <ListGroup key="sm" horizontal="sm" className="my-2">
                                 <ListGroup.Item style={{width: "20%", marginTop: "30px"}}>{backing.backingList.backingName}</ListGroup.Item>
                                 <ListGroup.Item style={{width: "20%", marginTop: "30px"}}>{backing.backingList.backingExplanation}</ListGroup.Item>
@@ -70,9 +77,17 @@ function MyPage() {
                                 <Button onClick={() => handleShow(index)} style={{marginLeft: '30px', marginTop: "30px"}}> 상세 보기 </Button>
                             </ListGroup>))}
                     </div>
+                    <Paging
+                        postsNum = {backingList.length}
+                        postsPerPage = {postsPerPage}
+                        setCurrentPage = {setCurrentPage}
+                        currentPage={currentPage}
+                    />
                 </div>
                 <UserBackingInfo/>
             </div>
+
+
 
             <Modal show={show.tf} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
                 <Modal.Header closeButton>
