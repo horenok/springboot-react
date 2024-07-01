@@ -28,12 +28,17 @@
 }
 
 .post-container > div {
-    /*flex: 0 0 33.333%; !* 성장하지 않고, 줄어들지 않으며, 기본 너비가 1/3 *!*/
-    margin: 100px; /* 요소들 사이의 간격을 위해 마진을 추가합니다 */
+    flex: 0 0 33.333%; /* 성장하지 않고, 줄어들지 않으며, 기본 너비가 1/3 */
+    /*margin: 100px; !* 요소들 사이의 간격을 위해 마진을 추가합니다 *!*/
 }
 
 .post-container > div > div {
     display: flex;
+    margin: 3%
+}
+
+.post-container > div > p {
+    margin: 3%
 }
 
 .post-container > div > div > button{
